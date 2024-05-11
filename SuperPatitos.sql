@@ -2,16 +2,15 @@ CREATE DATABASE SUPERPATITOS
 
 USE SUPERPATITOS
 
-
 -- Crear la tabla TipoIdentificacion
 CREATE TABLE TipoIdentificacion (
-    idTipoIdentificacion INT PRIMARY KEY IDENTITY,
+    idTipoIdentificacion INT PRIMARY KEY,
     TipoIdentificacion VARCHAR(50) NOT NULL
 );
 
 -- Crear la tabla Rol
 CREATE TABLE Rol (
-    idRol INT PRIMARY KEY IDENTITY,
+    idRol INT PRIMARY KEY,
     Rol VARCHAR(50) NOT NULL
 );
 
@@ -41,7 +40,19 @@ CREATE TABLE Productos (
 
 -- Crear la tabla tipoUnidad
 
--- Crear la tabla Tipo
+-- Crear la tabla Cliente
+CREATE TABLE Cliente (
+    idCliente INT PRIMARY KEY IDENTITY,
+    Nombre VARCHAR(50) NOT NULL,
+    PrimerApellido VARCHAR(50) NOT NULL,
+    SegundoApellido VARCHAR(50) NULL,
+    Correo VARCHAR(100) NOT NULL UNIQUE,
+    Telefono VARCHAR(20) NULL,
+    Identificacion VARCHAR(50) NOT NULL UNIQUE,
+    idTipoIdentificacion INT FOREIGN KEY REFERENCES TipoIdentificacion(idTipoIdentificacion) NOT NULL
+);
+
+-- Crear la tabla TipoDocumento
 CREATE TABLE TipoDocumento (
     idTipo INT PRIMARY KEY IDENTITY(1,1),
     Tipo VARCHAR(50) NOT NULL
@@ -69,18 +80,6 @@ CREATE TABLE Linea (
     Subtotal DECIMAL(10,2) NOT NULL,
     Impuesto DECIMAL(10,2) NOT NULL,
     Total DECIMAL(10,2) NOT NULL
-);
-
--- Crear la tabla Cliente
-CREATE TABLE Cliente (
-    idCliente INT PRIMARY KEY IDENTITY,
-    Nombre VARCHAR(50) NOT NULL,
-    PrimerApellido VARCHAR(50) NOT NULL,
-    SegundoApellido VARCHAR(50) NULL,
-    Correo VARCHAR(100) NOT NULL UNIQUE,
-    Telefono VARCHAR(20) NULL,
-    Identificacion VARCHAR(50) NOT NULL UNIQUE,
-    idTipoIdentificacion INT FOREIGN KEY REFERENCES TipoIdentificacion(idTipoIdentificacion) NOT NULL
 );
 
 -- Crear la tabla Ajuste
