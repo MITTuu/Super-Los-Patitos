@@ -16,7 +16,7 @@ namespace Super_Los_Patitos.Modelo
         {
             try
             {
-                cnx = new SqlConnection("Data Source=DYLAN;Initial Catalog=SuperLosPatitos;Integrated Security=True");
+                cnx = new SqlConnection($"Data Source={Environment.MachineName};Initial Catalog=SUPERPATITOS;Integrated Security=True");
                 cnx.Open();
             }
             catch (Exception e)
