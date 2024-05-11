@@ -35,14 +35,14 @@ CREATE TABLE Productos (
     Codigo VARCHAR(50) NOT NULL UNIQUE,
     PrecioUnitario DECIMAL(10,2) NOT NULL,
     Cantidad INT NOT NULL,
-    TipoMedida VARCHAR(50) NOT NULL 
+    TipoMedida VARCHAR(50) NOT NULL
 );
 
 -- Crear la tabla tipoUnidad
 
 -- Crear la tabla Cliente
 CREATE TABLE Cliente (
-    idCliente INT PRIMARY KEY IDENTITY,
+    idCliente INT PRIMARY KEY IDENTITY(1,1),
     Nombre VARCHAR(50) NOT NULL,
     PrimerApellido VARCHAR(50) NOT NULL,
     SegundoApellido VARCHAR(50) NULL,
@@ -54,15 +54,15 @@ CREATE TABLE Cliente (
 
 -- Crear la tabla TipoDocumento
 CREATE TABLE TipoDocumento (
-    idTipo INT PRIMARY KEY IDENTITY(1,1),
-    Tipo VARCHAR(50) NOT NULL
+    idTipoDocumento INT PRIMARY KEY,
+    TipoDocumento VARCHAR(50) NOT NULL
 );
 
 -- Crear la tabla Documentos
 CREATE TABLE Documentos (
-    idDocumento INT PRIMARY KEY IDENTITY,
-    idTipoDocumento INT FOREIGN KEY REFERENCES TipoDocumento(idTipo) NOT NULL,
-    FechaCreacion DATETIME NOT NULL,
+    idDocumento INT PRIMARY KEY IDENTITY(1,1),
+    idTipoDocumento INT FOREIGN KEY REFERENCES TipoDocumento(idTipoDocumento) NOT NULL,
+    FechaCreacion DATE NOT NULL,
     idCliente INT FOREIGN KEY REFERENCES Cliente(idCliente) NULL,
     Consecutivo INT NOT NULL,
     TotalImpuestos DECIMAL(10,2) NOT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE Documentos (
 
 -- Crear la tabla Linea
 CREATE TABLE Linea (
-    idLinea INT PRIMARY KEY IDENTITY,
+    idLinea INT PRIMARY KEY IDENTITY(1,1),
     idDocumento INT FOREIGN KEY REFERENCES Documentos(idDocumento) NOT NULL,
     Cantidad INT NOT NULL,
     idProducto INT FOREIGN KEY REFERENCES Productos(idProducto) NOT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE Linea (
 
 -- Crear la tabla Ajuste
 CREATE TABLE Ajuste (
-    AjusteId INT PRIMARY KEY IDENTITY,
+    AjusteId INT PRIMARY KEY IDENTITY(1,1),
     FechaAjuste DATE NOT NULL,
     idProducto INT FOREIGN KEY REFERENCES Productos(idProducto) NOT NULL,
     CantidadAjustada INT NOT NULL,
@@ -92,4 +92,24 @@ CREATE TABLE Ajuste (
     idPersonal INT FOREIGN KEY REFERENCES Personal(idPersonal) NOT NULL
 );
 
+-- Datos insertados por defecto
 
+INSERT INTO Rol (idRol, Rol)
+	VALUES
+	(1, 'Administrador'),
+	(2, 'Cajero'),
+	(3, 'Administrador de inventario'),
+	(4, 'Contador')
+
+INSERT INTO TipoIdentificacion (idTipoIdentificacion, TipoIdentificacion)
+	VALUES
+	(1, 'física'),
+	(2, 'jurídica'),
+	(3, 'DIMEX'),
+	(4, 'NITE')
+
+INSERT INTO TipoDocumento (idTipoDocumento, TipoDocumento)
+	VALUES
+	(1, 'Factura'),
+	(2, 'Tiquete'),
+	(3, 'Nota de credito')
