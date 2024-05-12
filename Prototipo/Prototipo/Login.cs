@@ -1,8 +1,10 @@
-﻿using Prototipo.Prototipo;
+﻿using Prototipo.Modelo;
+using Prototipo.Prototipo;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,11 +15,13 @@ namespace Prototipo.Prototipo
 {
     public partial class Login : Form
     {
+        private Cnx conexion;
         public Login()
         {
             InitializeComponent();
-            tbUsuario.Text = "admin";
-            tbContrasenia.Text = "123";
+            conexion = new Cnx();
+            tbUsuario.Text = "dylanmmz01@gmail.com";
+            tbContrasenia.Text = "Dylan.1234";
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -28,36 +32,29 @@ namespace Prototipo.Prototipo
         private void btnIngresar_Click(object sender, EventArgs e)
         {
             string usuario = tbUsuario.Text;
-            string contraseia = tbContrasenia.Text;
+            string contrasena = tbContrasenia.Text;
 
-            if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(contraseia))
+            if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(contrasena))
             {
 
                 MessageBox.Show("Ingresa un usuario para ingresar.");
             }
-            if (usuario == "admin" && contraseia == "123")
+
+            DataRow personalData = conexion.GetPersonalByEmailPassword(usuario, contrasena);
+
+            if (personalData != null)
             {
-                PantallaPrincipal pP = new PantallaPrincipal(this, 1, 1);
+                // Usuario y contraseña válidos
+                int idRol = Convert.ToInt32(personalData["idRol"]);
+                int idPersonal = Convert.ToInt32(personalData["idPersonal"]);
+
+                PantallaPrincipal pP = new PantallaPrincipal(this, idRol, personalData);
                 pP.Show();
                 this.Hide();
             }
-            if (usuario == "cajero" && contraseia == "123")
+            else
             {
-                PantallaPrincipal pP = new PantallaPrincipal(this, 2, 2);
-                pP.Show();
-                this.Hide();
-            }
-            if (usuario == "admini" && contraseia == "123")
-            {
-                PantallaPrincipal pP = new PantallaPrincipal(this, 3, 3);
-                pP.Show();
-                this.Hide();
-            }
-            if (usuario == "contador" && contraseia == "123")
-            {
-                PantallaPrincipal pP = new PantallaPrincipal(this, 4, 4);
-                pP.Show();
-                this.Hide();
+                MessageBox.Show("Usuario o contraseña incorrectos.");
             }
         }
     }

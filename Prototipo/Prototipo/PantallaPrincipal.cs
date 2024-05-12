@@ -13,22 +13,22 @@ namespace Prototipo.Prototipo
     public partial class PantallaPrincipal : Form
     {
         int idRol;
-        int idUsuario;
+        DataRow personalData;
         bool sesion;
         Login l;
 
-        public PantallaPrincipal(Login l,int idRol, int idUsuario)
+        public PantallaPrincipal(Login l,int idRol, DataRow personalData)
         {
             InitializeComponent();
             this.idRol = idRol;
-            this.idUsuario = idUsuario;
+            this.personalData = personalData;
             this.l = l;
             this.sesion = false;
         }
 
         private void PantallaPrincipal_Load(object sender, EventArgs e)
         {
-            lbBienvenido.Text = lbBienvenido.Text + $" usuario {idUsuario}!";
+            lbBienvenido.Text = lbBienvenido.Text + $" {personalData["Nombre"]}!";
             if (idRol == 1)
             {
                 // Apilar los paneles 
@@ -85,18 +85,6 @@ namespace Prototipo.Prototipo
 
         }
 
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            String mensaje = "¿Desea cerrar el programa?";
-            DialogResult resultado = MessageBox.Show(mensaje, "Salir", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (resultado == DialogResult.Yes)
-            {
-                l.Close();
-                this.Close();
-            }
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
 
@@ -114,7 +102,7 @@ namespace Prototipo.Prototipo
 
         private void btnFacturar_Click(object sender, EventArgs e)
         {
-            abrir_Ventana(new Facturar());
+            abrir_Ventana(new Facturar(personalData));
         }
 
         private void btnReporteFac_Click(object sender, EventArgs e)
@@ -149,6 +137,17 @@ namespace Prototipo.Prototipo
         private void pnVentana_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void PantallaPrincipal_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            String mensaje = "¿Desea cerrar el programa?";
+            DialogResult resultado = MessageBox.Show(mensaje, "Salir", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.Yes)
+            {
+                l.Close();
+            }
         }
     }
 }

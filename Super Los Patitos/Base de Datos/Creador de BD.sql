@@ -122,3 +122,8 @@ INSERT INTO UnidadesMedida (idUnidadMedida, UnidadMedida)
     VALUES
     (1, 'unidad'),
     (2, 'kilogramo')
+
+-- ADMIN
+INSERT INTO Personal (Nombre, PrimerApellido, SegundoApellido, Correo, Contrasena, Telefono, Identificacion, idTipoIdentificacion, idRol)
+VALUES
+	('Dylan', 'Montiel', 'Zúñiga', 'dylanmmz01@gmail.com', 'Dylan.1234', '62609932', '703050437', 1, 1);
