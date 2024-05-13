@@ -187,7 +187,8 @@
     <None Include="Resources\SP%28120%29.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Modelo\DataSource.txt" />
+    <Content Include="Modelo\BD\Creador de BD.sql" />
+    <Content Include="Modelo\BD\Stored Procedures.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
