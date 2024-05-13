@@ -23,37 +23,49 @@ namespace Prototipo.Prototipo
             cbTipoMedida.SelectedIndex = 0;
             conexion = new Cnx();
             this.idRol = idRol;
-            dicMedidas = new Dictionary<string, int>();
-            dicMedidas.Add("unidad", 1);
-            dicMedidas.Add("kilogramo", 2);
+            dicMedidas = new Dictionary<string, int>
+            {
+                { "unidad", 1 },
+                { "kilogramo", 2 }
+            };
         }
 
+        /// <summary>
+        /// Guarda en la base de datos los datos del producto registrado en la GUI
+        /// </summary>
         private void RegistrarProducto()
         {
             // recolectar la información
-            string codigoValue = tbCodigo.Text;
-            string descripcion = tbDescripcion.Text;
-            string precioValue = tbPrecioU.Text;
-            string cantidadValue = tbCantidad.Text;
-            string medidaValue = cbTipoMedida.SelectedText;
+            string codigoText = tbCodigo.Text;
+            string descripcionText = tbDescripcion.Text;
+            string precioText = tbPrecioU.Text;
+            string cantidadText = tbCantidad.Text;
+            string medidaText = cbTipoMedida.Text;
 
-            // validar
-            if (descripcion.Length == 0)
+            // validar y convertir tipos
+            if (descripcionText.Length == 0)
             {
                 MessageBox.Show("Es necesario agregar una descripción (nombre).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            double.TryParse(precioText, out double precio);
 
-            medidaValue = dicMedidas[medidaValue].ToString(); // tiene error, no existe la key??
+            int.TryParse(cantidadText, out int cantidad);
+
+            int medida = dicMedidas[medidaText];
+
 
             // ejecutar stored procedure
-            if (conexion.InsertProducto(codigoValue, descripcion, precioValue, cantidadValue, medidaValue))
+            if (conexion.InsertProducto(codigoText, descripcionText, precio, cantidad, medida))
             {
-                MessageBox.Show("Producto registrado cone exito");
+                MessageBox.Show("Producto registrado con exito");
                 ResetRegistroUI();
             }
         }
 
+        /// <summary>
+        /// Coloca los valores iniciales de los elementos de la sección de registro de producto
+        /// </summary>
         private void ResetRegistroUI()
         {
             tbCodigo.Text = "0";
@@ -73,6 +85,11 @@ namespace Prototipo.Prototipo
             EP.Show();
         }
 
+        /// <summary>
+        /// Bloquea la escritura de datos no enteros positivos en un TextBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CheckOnlyIntKeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -81,6 +98,11 @@ namespace Prototipo.Prototipo
             }
         }
 
+        /// <summary>
+        /// Bloquea la escritura de datos no decimales positivos en un TextBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CheckOnlyDecimalKeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
@@ -96,6 +118,12 @@ namespace Prototipo.Prototipo
             }
         }
 
+        /// <summary>
+        /// Arregla un numero escrito en un TextBox para no sobrepasar <c>max</c>
+        /// y no tener más de 2 decimales
+        /// </summary>
+        /// <param name="tb"></param>
+        /// <param name="max"></param>
         private void FixDecimalTextBox(TextBox tb, double max)
         {
             Double.TryParse(tb.Text, out Double value);

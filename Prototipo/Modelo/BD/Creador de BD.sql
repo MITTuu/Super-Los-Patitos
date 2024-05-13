@@ -128,6 +128,3 @@ INSERT INTO Personal (Nombre, PrimerApellido, SegundoApellido, Correo, Contrasen
 VALUES
     ('Oscar', 'Roni', 'Ordoñez', 'oscar.gt.140.ro@gmail.com', '1212', '88888888', '119030573', 1, 1),
 	('Dylan', 'Montiel', 'Zúñiga', 'dylanmmz01@gmail.com', 'Dylan.1234', '62609932', '703050437', 1, 1);
-
-
-SELECT * FROM Productos

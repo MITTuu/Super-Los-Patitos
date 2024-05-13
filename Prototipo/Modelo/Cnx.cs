@@ -155,7 +155,7 @@ namespace Prototipo.Modelo
         }
 
 
-        public bool InsertProducto(string codigo, string descripcion, string precio, string cantidad, string medida)
+        public bool InsertProducto(string codigo, string descripcion, double precio, int cantidad, int medida)
         {
             try
             {
@@ -166,7 +166,6 @@ namespace Prototipo.Modelo
                     SqlCommand command = new SqlCommand("InsertProducto", connection);
                     command.CommandType = CommandType.StoredProcedure;
 
-                    command.Parameters.AddWithValue("@idProducto", codigo);
                     command.Parameters.AddWithValue("@Nombre", descripcion);
                     command.Parameters.AddWithValue("@Codigo", codigo);
                     command.Parameters.AddWithValue("@PrecioUnitario", precio);
