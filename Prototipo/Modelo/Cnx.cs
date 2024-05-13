@@ -121,5 +121,37 @@ namespace Prototipo.Modelo
 
             return clienteData;
         }
+
+
+        public bool InsertCliente(string nombre, string primerApellido, string segundoApellido, string correo, string telefono, string identificacion, int idTipoIdentificacion)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("InsertCliente", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@Nombre", nombre);
+                    command.Parameters.AddWithValue("@PrimerApellido", primerApellido);
+                    command.Parameters.AddWithValue("@SegundoApellido", segundoApellido);
+                    command.Parameters.AddWithValue("@Correo", correo);
+                    command.Parameters.AddWithValue("@Telefono", telefono);
+                    command.Parameters.AddWithValue("@Identificacion", identificacion);
+                    command.Parameters.AddWithValue("@idTipoIdentificacion", idTipoIdentificacion);
+
+                    command.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al insertar el cliente: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false; 
+            }
+        }
     }
 }

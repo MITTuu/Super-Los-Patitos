@@ -45,7 +45,7 @@ namespace Prototipo.Prototipo
 
             if (clienteData != null)
             {
-                MessageBox.Show("Cliente registrado.");
+                MessageBox.Show("Cliente registrado: " + $"{clienteData["Nombre"]}");
             }
             else
             {

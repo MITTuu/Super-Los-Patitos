@@ -31,8 +31,6 @@
             this.pnFacturar = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnBuscarProducto = new System.Windows.Forms.Button();
             this.btnBuscarCliente = new System.Windows.Forms.Button();
@@ -52,7 +50,6 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.pnFacturar.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.pnDetalle.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -64,7 +61,6 @@
             this.pnFacturar.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.pnFacturar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnFacturar.Controls.Add(this.panel2);
-            this.pnFacturar.Controls.Add(this.panel1);
             this.pnFacturar.Controls.Add(this.label4);
             this.pnFacturar.Controls.Add(this.btnBuscarProducto);
             this.pnFacturar.Controls.Add(this.btnBuscarCliente);
@@ -86,9 +82,9 @@
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.label6);
-            this.panel2.Location = new System.Drawing.Point(21, 422);
+            this.panel2.Location = new System.Drawing.Point(21, 321);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(682, 269);
+            this.panel2.Size = new System.Drawing.Size(682, 370);
             this.panel2.TabIndex = 12;
             // 
             // label6
@@ -103,33 +99,12 @@
             this.label6.Text = "Cargar las coincidencias con el producto ingresado\r\ny poder seleccionarlo para añ" +
     "adirlo al detalle\r\n";
             // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Location = new System.Drawing.Point(21, 203);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(682, 80);
-            this.panel1.TabIndex = 11;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label5.Location = new System.Drawing.Point(3, 13);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(418, 50);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "Buscar los datos del cliente, de no encontrarse\r\nse pregunta si se quiere registr" +
-    "ar en el sistema.\r\n";
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label4.Location = new System.Drawing.Point(24, 362);
+            this.label4.Location = new System.Drawing.Point(24, 278);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(96, 25);
             this.label4.TabIndex = 10;
@@ -140,7 +115,7 @@
             this.btnBuscarProducto.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.btnBuscarProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBuscarProducto.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnBuscarProducto.Location = new System.Drawing.Point(597, 350);
+            this.btnBuscarProducto.Location = new System.Drawing.Point(597, 266);
             this.btnBuscarProducto.Name = "btnBuscarProducto";
             this.btnBuscarProducto.Size = new System.Drawing.Size(107, 49);
             this.btnBuscarProducto.TabIndex = 9;
@@ -189,7 +164,7 @@
             // tbProducto
             // 
             this.tbProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbProducto.Location = new System.Drawing.Point(195, 357);
+            this.tbProducto.Location = new System.Drawing.Point(195, 273);
             this.tbProducto.Name = "tbProducto";
             this.tbProducto.Size = new System.Drawing.Size(290, 30);
             this.tbProducto.TabIndex = 4;
@@ -199,7 +174,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label3.Location = new System.Drawing.Point(298, 311);
+            this.label3.Location = new System.Drawing.Point(298, 227);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(187, 25);
             this.label3.TabIndex = 3;
@@ -325,8 +300,6 @@
             this.pnFacturar.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.pnDetalle.ResumeLayout(false);
@@ -357,8 +330,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnBuscarProducto;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label7;
