@@ -183,5 +183,32 @@ namespace Prototipo.Modelo
             }
 
         }
+
+        public DataTable GetProductoBySearch(string busqueda)
+        {
+            DataTable dt = new DataTable();
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("SelectProductoCoincidencia", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@busqueda", busqueda);
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    adapter.Fill(dt);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK);
+            }
+
+            return dt;
+        }
     }
 }

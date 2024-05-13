@@ -30,10 +30,7 @@
         {
             this.pnProductos = new System.Windows.Forms.Panel();
             this.btnBuscar = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.btnEditar = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
+            this.tbBusqueda = new System.Windows.Forms.TextBox();
             this.pnTitulo = new System.Windows.Forms.Panel();
             this.lbRegistro = new System.Windows.Forms.Label();
             this.lbCodigo = new System.Windows.Forms.Label();
@@ -48,79 +45,46 @@
             this.btnAgregar = new System.Windows.Forms.Button();
             this.pnRegistro = new System.Windows.Forms.Panel();
             this.tbPrecioU = new System.Windows.Forms.TextBox();
+            this.dgvProductos = new System.Windows.Forms.DataGridView();
             this.pnProductos.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.pnTitulo.SuspendLayout();
             this.pnRegistro.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
             // 
             // pnProductos
             // 
             this.pnProductos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnProductos.Controls.Add(this.dgvProductos);
             this.pnProductos.Controls.Add(this.btnBuscar);
-            this.pnProductos.Controls.Add(this.textBox1);
-            this.pnProductos.Controls.Add(this.panel2);
-            this.pnProductos.Location = new System.Drawing.Point(127, 278);
+            this.pnProductos.Controls.Add(this.tbBusqueda);
+            this.pnProductos.Location = new System.Drawing.Point(42, 174);
             this.pnProductos.Margin = new System.Windows.Forms.Padding(2);
             this.pnProductos.Name = "pnProductos";
-            this.pnProductos.Size = new System.Drawing.Size(1061, 320);
+            this.pnProductos.Size = new System.Drawing.Size(1061, 386);
             this.pnProductos.TabIndex = 3;
             // 
             // btnBuscar
             // 
             this.btnBuscar.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBuscar.Location = new System.Drawing.Point(910, 47);
+            this.btnBuscar.Location = new System.Drawing.Point(909, 13);
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(2);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 37);
             this.btnBuscar.TabIndex = 2;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = false;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
-            // textBox1
+            // tbBusqueda
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(72, 53);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(834, 24);
-            this.textBox1.TabIndex = 1;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.panel2.Controls.Add(this.btnEditar);
-            this.panel2.Controls.Add(this.label5);
-            this.panel2.Location = new System.Drawing.Point(72, 128);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(912, 166);
-            this.panel2.TabIndex = 0;
-            // 
-            // btnEditar
-            // 
-            this.btnEditar.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnEditar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditar.Location = new System.Drawing.Point(758, 74);
-            this.btnEditar.Margin = new System.Windows.Forms.Padding(2);
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(75, 37);
-            this.btnEditar.TabIndex = 3;
-            this.btnEditar.Text = "Editar";
-            this.btnEditar.UseVisualStyleBackColor = false;
-            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(42, 79);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(314, 24);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Visializar los productos en inventario\r\n";
+            this.tbBusqueda.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbBusqueda.Location = new System.Drawing.Point(71, 20);
+            this.tbBusqueda.Margin = new System.Windows.Forms.Padding(2);
+            this.tbBusqueda.Name = "tbBusqueda";
+            this.tbBusqueda.Size = new System.Drawing.Size(834, 24);
+            this.tbBusqueda.TabIndex = 1;
             // 
             // pnTitulo
             // 
@@ -278,7 +242,7 @@
             this.pnRegistro.Controls.Add(this.tbCodigo);
             this.pnRegistro.Controls.Add(this.lbCodigo);
             this.pnRegistro.Controls.Add(this.pnTitulo);
-            this.pnRegistro.Location = new System.Drawing.Point(126, 69);
+            this.pnRegistro.Location = new System.Drawing.Point(42, 31);
             this.pnRegistro.Margin = new System.Windows.Forms.Padding(2);
             this.pnRegistro.Name = "pnRegistro";
             this.pnRegistro.Size = new System.Drawing.Size(1061, 115);
@@ -297,13 +261,29 @@
             this.tbPrecioU.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckOnlyDecimalKeyPress);
             this.tbPrecioU.Leave += new System.EventHandler(this.tbPrecioU_Leave);
             // 
+            // dgvProductos
+            // 
+            this.dgvProductos.AllowUserToAddRows = false;
+            this.dgvProductos.AllowUserToDeleteRows = false;
+            this.dgvProductos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProductos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dgvProductos.Location = new System.Drawing.Point(71, 64);
+            this.dgvProductos.MultiSelect = false;
+            this.dgvProductos.Name = "dgvProductos";
+            this.dgvProductos.ReadOnly = true;
+            this.dgvProductos.RowHeadersVisible = false;
+            this.dgvProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvProductos.Size = new System.Drawing.Size(913, 293);
+            this.dgvProductos.TabIndex = 3;
+            // 
             // Inventario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1312, 650);
+            this.ClientSize = new System.Drawing.Size(1163, 650);
             this.Controls.Add(this.pnProductos);
             this.Controls.Add(this.pnRegistro);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -312,23 +292,19 @@
             this.Text = " ";
             this.pnProductos.ResumeLayout(false);
             this.pnProductos.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.pnTitulo.ResumeLayout(false);
             this.pnTitulo.PerformLayout();
             this.pnRegistro.ResumeLayout(false);
             this.pnRegistro.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
         private System.Windows.Forms.Panel pnProductos;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button btnEditar;
+        private System.Windows.Forms.TextBox tbBusqueda;
         private System.Windows.Forms.Panel pnTitulo;
         private System.Windows.Forms.Label lbRegistro;
         private System.Windows.Forms.Label lbCodigo;
@@ -343,5 +319,6 @@
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Panel pnRegistro;
         private System.Windows.Forms.TextBox tbPrecioU;
+        private System.Windows.Forms.DataGridView dgvProductos;
     }
 }

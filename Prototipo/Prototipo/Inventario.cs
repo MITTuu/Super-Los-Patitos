@@ -22,6 +22,7 @@ namespace Prototipo.Prototipo
             InitializeComponent();
             cbTipoMedida.SelectedIndex = 0;
             conexion = new Cnx();
+            BuscarProducto();
             this.idRol = idRol;
             dicMedidas = new Dictionary<string, int>
             {
@@ -73,6 +74,13 @@ namespace Prototipo.Prototipo
             tbPrecioU.Text = "0";
             tbCantidad.Text = "0";
             cbTipoMedida.SelectedIndex = 0;
+        }
+
+        private void BuscarProducto()
+        {
+            string busqueda = tbBusqueda.Text;
+            DataTable dt = conexion.GetProductoBySearch(busqueda);
+            dgvProductos.DataSource = dt.DefaultView;
         }
 
         // ------------------------------------------------------------------------
@@ -153,6 +161,11 @@ namespace Prototipo.Prototipo
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             RegistrarProducto();
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            BuscarProducto();
         }
     }
 }

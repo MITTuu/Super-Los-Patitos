@@ -95,3 +95,14 @@ BEGIN
     INSERT INTO Productos (Nombre, Codigo, PrecioUnitario, Cantidad, idUnidadMedida)
     VALUES (@Nombre, @Codigo, @PrecioUnitario, @Cantidad, @idUnidadMedida);
 END;
+
+-- Seleccionar los productos que tengan coincidencias con la busqueda
+CREATE PROCEDURE SelectProductoCoincidencia
+    @busqueda VARCHAR(100)
+AS
+BEGIN
+    SELECT idProducto AS ID, Nombre, Codigo, CONCAT(PrecioUnitario, '/', SUBSTRING(u.UnidadMedida, 0, 4)) AS Precio, Cantidad
+    FROM Productos AS p
+    INNER JOIN UnidadesMedida AS u ON p.idUnidadMedida = u.idUnidadMedida
+    WHERE Nombre LIKE CONCAT('%',@busqueda,'%');
+END
