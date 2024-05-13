@@ -153,5 +153,36 @@ namespace Prototipo.Modelo
                 return false; 
             }
         }
+
+
+        public bool InsertProducto(string codigo, string descripcion, string precio, string cantidad, string medida)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("InsertProducto", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@idProducto", codigo);
+                    command.Parameters.AddWithValue("@Nombre", descripcion);
+                    command.Parameters.AddWithValue("@Codigo", codigo);
+                    command.Parameters.AddWithValue("@PrecioUnitario", precio);
+                    command.Parameters.AddWithValue("@Cantidad", cantidad);
+                    command.Parameters.AddWithValue("@idUnidadMedida", medida);
+
+                    command.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK);
+                return false;
+            }
+
+        }
     }
 }

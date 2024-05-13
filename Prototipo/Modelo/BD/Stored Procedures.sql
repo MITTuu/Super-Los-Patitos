@@ -82,3 +82,17 @@ BEGIN
     INSERT INTO Clientes (Nombre, PrimerApellido, SegundoApellido, Correo, Telefono, Identificacion, idTipoIdentificacion)
     VALUES (@Nombre, @PrimerApellido, @SegundoApellido, @Correo, @Telefono, @Identificacion, @idTipoIdentificacion);
 END;
+
+-- Insertar un nuevo producto en la BD
+CREATE PROCEDURE InsertProducto
+    @idProducto INT,
+    @Nombre VARCHAR(100),
+    @Codigo VARCHAR(50),
+    @PrecioUnitario DECIMAL(10,2),
+    @Cantidad INT,
+    @idUnidadMedida INT
+AS
+BEGIN
+    INSERT INTO Productos (idProducto, Nombre, Codigo, PrecioUnitario, Cantidad, idUnidadMedida)
+    VALUES (@idProducto, @Nombre, @Codigo, @PrecioUnitario, @Cantidad, @idUnidadMedida);
+END;

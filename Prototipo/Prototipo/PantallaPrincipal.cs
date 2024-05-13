@@ -111,7 +111,7 @@ namespace Prototipo.Prototipo
         }
         private void btnAjustesI_Click(object sender, EventArgs e)
         {
-            abrir_Ventana(new Inventario());
+            abrir_Ventana(new Inventario(idRol));
         }
 
         //Abrir otro form pero en un form 
