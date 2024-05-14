@@ -114,6 +114,11 @@ namespace Prototipo.Prototipo
             abrir_Ventana(new Inventario(idRol));
         }
 
+        private void btAjusteInventario_Click(object sender, EventArgs e)
+        {
+            abrir_Ventana(new AjusteInventario((int) personalData["idPersonal"]));
+        }
+
         //Abrir otro form pero en un form 
         private void abrir_Ventana(object nuevaVentana)
         {

@@ -88,12 +88,17 @@ CREATE TABLE Lineas (
 
 -- Crear la tabla Ajustes
 CREATE TABLE Ajustes (
-    AjusteId INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    idAjuste INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
     FechaAjuste DATE NOT NULL,
-    idProducto INT FOREIGN KEY REFERENCES Productos(idProducto) NOT NULL,
-    CantidadAjustada INT NOT NULL,
     Razon VARCHAR(200) NOT NULL,
     idPersonal INT FOREIGN KEY REFERENCES Personal(idPersonal) NOT NULL
+);
+
+CREATE TABLE AjustesProducto (
+    idAjusteProducto INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    idProducto INT FOREIGN KEY REFERENCES Productos(idProducto) NOT NULL,
+    CantidadAjustada INT NOT NULL,
+    idAjuste INT FOREIGN KEY REFERENCES Ajustes(idAjuste) NOT NULL
 );
 
 -- Datos insertados por defecto

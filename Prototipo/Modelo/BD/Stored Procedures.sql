@@ -106,3 +106,35 @@ BEGIN
     INNER JOIN UnidadesMedida AS u ON p.idUnidadMedida = u.idUnidadMedida
     WHERE Nombre LIKE CONCAT('%',@busqueda,'%');
 END
+
+-- insertar un ajuste de inventario
+CREATE PROCEDURE InsertAjuste
+    @Razon VARCHAR(255),
+    @idPersonal INT
+AS
+BEGIN
+    INSERT INTO Ajustes
+        (FechaAjuste, Razon, idPersonal)
+        VALUES
+        (CURRENT_TIMESTAMP, @Razon, @idPersonal);
+    SELECT SCOPE_IDENTITY();
+END
+
+-- Insertar un ajuste individual de producto
+CREATE PROCEDURE InsertAjusteProducto
+    @idProducto INT,
+    @CantidadAjustada INT,
+    @idAjuste INT
+AS
+BEGIN
+    -- insertar ajuste
+    INSERT INTO AjustesProducto
+        (idProducto, CantidadAjustada, idAjuste)
+        VALUES
+        (@idProducto, @CantidadAjustada, @idAjuste);
+    
+    -- modificar inventario
+    UPDATE Productos
+        SET Cantidad = (Cantidad + @CantidadAjustada)
+        WHERE idProducto = @idProducto;
+END

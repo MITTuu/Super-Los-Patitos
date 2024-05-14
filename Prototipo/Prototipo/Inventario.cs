@@ -15,6 +15,7 @@ namespace Prototipo.Prototipo
     {
         private Cnx conexion;
         private Dictionary<string, int> dicMedidas;
+        DataTable tablaProductos;
         int idRol;
 
         public Inventario(int idRol)
@@ -50,9 +51,7 @@ namespace Prototipo.Prototipo
                 return;
             }
             double.TryParse(precioText, out double precio);
-
             int.TryParse(cantidadText, out int cantidad);
-
             int medida = dicMedidas[medidaText];
 
 
@@ -62,6 +61,8 @@ namespace Prototipo.Prototipo
                 MessageBox.Show("Producto registrado con exito");
                 ResetRegistroUI();
             }
+
+            BuscarProducto();
         }
 
         /// <summary>
@@ -79,19 +80,13 @@ namespace Prototipo.Prototipo
         private void BuscarProducto()
         {
             string busqueda = tbBusqueda.Text;
-            DataTable dt = conexion.GetProductoBySearch(busqueda);
-            dgvProductos.DataSource = dt.DefaultView;
+            tablaProductos = conexion.GetProductoBySearch(busqueda);
+            dgvProductos.DataSource = tablaProductos.DefaultView;
         }
 
         // ------------------------------------------------------------------------
         // Event Handlers 
         // ------------------------------------------------------------------------
-
-        private void btnEditar_Click(object sender, EventArgs e)
-        {
-            EditarProducto EP = new EditarProducto();
-            EP.Show();
-        }
 
         /// <summary>
         /// Bloquea la escritura de datos no enteros positivos en un TextBox
@@ -166,6 +161,12 @@ namespace Prototipo.Prototipo
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             BuscarProducto();
+        }
+
+        private void dgvProductos_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            EditarProducto EP = new EditarProducto();
+            EP.Show();
         }
     }
 }

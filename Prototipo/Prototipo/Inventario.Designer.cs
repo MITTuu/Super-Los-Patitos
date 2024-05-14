@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.pnProductos = new System.Windows.Forms.Panel();
+            this.dgvProductos = new System.Windows.Forms.DataGridView();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.tbBusqueda = new System.Windows.Forms.TextBox();
             this.pnTitulo = new System.Windows.Forms.Panel();
@@ -45,11 +46,10 @@
             this.btnAgregar = new System.Windows.Forms.Button();
             this.pnRegistro = new System.Windows.Forms.Panel();
             this.tbPrecioU = new System.Windows.Forms.TextBox();
-            this.dgvProductos = new System.Windows.Forms.DataGridView();
             this.pnProductos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.pnTitulo.SuspendLayout();
             this.pnRegistro.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.SuspendLayout();
             // 
             // pnProductos
@@ -61,8 +61,25 @@
             this.pnProductos.Location = new System.Drawing.Point(42, 174);
             this.pnProductos.Margin = new System.Windows.Forms.Padding(2);
             this.pnProductos.Name = "pnProductos";
-            this.pnProductos.Size = new System.Drawing.Size(1061, 386);
+            this.pnProductos.Size = new System.Drawing.Size(1061, 409);
             this.pnProductos.TabIndex = 3;
+            // 
+            // dgvProductos
+            // 
+            this.dgvProductos.AllowUserToAddRows = false;
+            this.dgvProductos.AllowUserToDeleteRows = false;
+            this.dgvProductos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProductos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dgvProductos.Location = new System.Drawing.Point(71, 64);
+            this.dgvProductos.MultiSelect = false;
+            this.dgvProductos.Name = "dgvProductos";
+            this.dgvProductos.ReadOnly = true;
+            this.dgvProductos.RowHeadersVisible = false;
+            this.dgvProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvProductos.Size = new System.Drawing.Size(913, 315);
+            this.dgvProductos.TabIndex = 3;
+            this.dgvProductos.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvProductos_CellMouseDoubleClick);
             // 
             // btnBuscar
             // 
@@ -261,22 +278,6 @@
             this.tbPrecioU.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckOnlyDecimalKeyPress);
             this.tbPrecioU.Leave += new System.EventHandler(this.tbPrecioU_Leave);
             // 
-            // dgvProductos
-            // 
-            this.dgvProductos.AllowUserToAddRows = false;
-            this.dgvProductos.AllowUserToDeleteRows = false;
-            this.dgvProductos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProductos.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dgvProductos.Location = new System.Drawing.Point(71, 64);
-            this.dgvProductos.MultiSelect = false;
-            this.dgvProductos.Name = "dgvProductos";
-            this.dgvProductos.ReadOnly = true;
-            this.dgvProductos.RowHeadersVisible = false;
-            this.dgvProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProductos.Size = new System.Drawing.Size(913, 293);
-            this.dgvProductos.TabIndex = 3;
-            // 
             // Inventario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -292,11 +293,11 @@
             this.Text = " ";
             this.pnProductos.ResumeLayout(false);
             this.pnProductos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             this.pnTitulo.ResumeLayout(false);
             this.pnTitulo.PerformLayout();
             this.pnRegistro.ResumeLayout(false);
             this.pnRegistro.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             this.ResumeLayout(false);
 
         }
