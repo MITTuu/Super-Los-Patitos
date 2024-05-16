@@ -55,6 +55,12 @@
     <Compile Include="Prototipo\AjusteInventario.Designer.cs">
       <DependentUpon>AjusteInventario.cs</DependentUpon>
     </Compile>
+    <Compile Include="Prototipo\DetalleAjuste.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Prototipo\DetalleAjuste.Designer.cs">
+      <DependentUpon>DetalleAjuste.cs</DependentUpon>
+    </Compile>
     <Compile Include="Prototipo\EditarProducto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +127,9 @@
     </Compile>
     <EmbeddedResource Include="Prototipo\AjusteInventario.resx">
       <DependentUpon>AjusteInventario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Prototipo\DetalleAjuste.resx">
+      <DependentUpon>DetalleAjuste.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Prototipo\EditarProducto.resx">
       <DependentUpon>EditarProducto.cs</DependentUpon>

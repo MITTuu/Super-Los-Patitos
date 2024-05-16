@@ -138,3 +138,35 @@ BEGIN
         SET Cantidad = (Cantidad + @CantidadAjustada)
         WHERE idProducto = @idProducto;
 END
+
+-- Seleccionar información basica/general de todos los ajustes
+CREATE PROCEDURE SelectAjustes
+AS
+BEGIN
+    SELECT idAjuste AS [ID], a.FechaAjuste AS [Fecha], a.Razon, CONCAT_WS(' ', p.Nombre, p.PrimerApellido) AS [Responsable]
+    FROM Ajustes AS a
+    LEFT JOIN Personal AS p ON a.idPersonal = p.idPersonal
+    ORDER BY FechaAjuste DESC
+END
+
+-- Selecciona la info de 1 por medio de su ID
+CREATE PROCEDURE SelectAjusteById
+    @idAjuste INT
+AS
+BEGIN
+    SELECT a.FechaAjuste AS [Fecha], a.Razon, CONCAT_WS(' ', p.Nombre, p.PrimerApellido) AS [Responsable]
+    FROM Ajustes AS a
+    LEFT JOIN Personal AS p ON a.idPersonal = p.idPersonal 
+    WHERE a.idAjuste = @idAjuste
+END
+
+-- Seleccionar ajustes de productos individuales asociados a un ajuste
+CREATE PROCEDURE SelectAjustesProdutos
+    @idAjuste INT
+AS
+BEGIN
+    SELECT p.Nombre AS [Producto], a.CantidadAjustada AS [Cantidad Ajustada]
+    FROM AjustesProducto AS a
+    LEFT JOIN Productos AS p ON a.idProducto = p.idProducto
+    WHERE a.idAjuste = @idAjuste
+END
