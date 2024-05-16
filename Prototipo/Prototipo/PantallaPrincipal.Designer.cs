@@ -49,6 +49,7 @@
             this.lbBienvenido = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnCS = new System.Windows.Forms.Button();
+            this.btnNC = new System.Windows.Forms.Button();
             this.pnOpciones.SuspendLayout();
             this.pnInformes.SuspendLayout();
             this.pnGestionInventario.SuspendLayout();
@@ -139,6 +140,7 @@
             // 
             // pnFacturacion
             // 
+            this.pnFacturacion.Controls.Add(this.btnNC);
             this.pnFacturacion.Controls.Add(this.btnFacturar);
             this.pnFacturacion.Controls.Add(this.lbFacturacion);
             this.pnFacturacion.Dock = System.Windows.Forms.DockStyle.Top;
@@ -293,6 +295,18 @@
             this.btnCS.UseVisualStyleBackColor = true;
             this.btnCS.Click += new System.EventHandler(this.btnCS_Click);
             // 
+            // btnNC
+            // 
+            this.btnNC.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnNC.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNC.Location = new System.Drawing.Point(3, 108);
+            this.btnNC.Name = "btnNC";
+            this.btnNC.Size = new System.Drawing.Size(323, 51);
+            this.btnNC.TabIndex = 3;
+            this.btnNC.Text = "Notas de crédito";
+            this.btnNC.UseVisualStyleBackColor = false;
+            this.btnNC.Click += new System.EventHandler(this.btnNC_Click);
+            // 
             // PantallaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -348,5 +362,6 @@
         private System.Windows.Forms.Button btnAjustesI;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnReporteFac;
+        private System.Windows.Forms.Button btnNC;
     }
 }

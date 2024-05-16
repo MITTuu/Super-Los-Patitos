@@ -153,5 +153,344 @@ namespace Prototipo.Modelo
                 return false; 
             }
         }
+
+        public DataTable GetProductos()
+        {
+            DataTable productosData = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("GetProductos", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        productosData = dataTable;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK);
+            }
+
+            return productosData;
+        }
+
+        public DataTable GetProductosByNombre(string nombreBuscar)
+        {
+            DataTable productosData = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("GetProductosByNombre", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@NombreBuscar", nombreBuscar);
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        productosData = dataTable;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK);
+            }
+
+            return productosData;
+        }
+
+        public DataTable GetProductosByCodigo(string codigoBuscar)
+        {
+            DataTable productosData = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("GetProductosByCodigo", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@codigoBuscar", codigoBuscar);
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        productosData = dataTable;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK);
+            }
+
+            return productosData;
+        }
+
+        public int GetSiguienteConsecutivo(int idTipoDocumento)
+        {
+            int siguienteConsecutivo = 0;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("GetSiguienteConsecutivo", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@idTipoDocumento", idTipoDocumento);
+
+                    // Ejecutar el comando y obtener el resultado (siguiente consecutivo)
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            siguienteConsecutivo = Convert.ToInt32(reader["SiguienteConsecutivo"]);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener el siguiente consecutivo: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return siguienteConsecutivo;
+        }
+
+        public bool InsertLinea(int idDocumento, decimal cantidad, int idProducto, decimal subtotal, decimal impuesto, decimal total)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("InsertLinea", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@idDocumento", idDocumento);
+                    command.Parameters.AddWithValue("@Cantidad", cantidad);
+                    command.Parameters.AddWithValue("@idProducto", idProducto);
+                    command.Parameters.AddWithValue("@Subtotal", subtotal);
+                    command.Parameters.AddWithValue("@Impuesto", impuesto);
+                    command.Parameters.AddWithValue("@Total", total);
+
+                    command.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al insertar la linea: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        public bool InsertDocumento(int idTipoDocumento, int consecutivo, int idPersonal, object idCliente, decimal Subtotal, decimal TotalImp, decimal Total)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("InsertDocumento", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@idTipoDocumento", idTipoDocumento);
+                    command.Parameters.AddWithValue("@Consecutivo", consecutivo);
+                    command.Parameters.AddWithValue("@idPersonal", idPersonal);
+                    command.Parameters.AddWithValue("@idCliente", idCliente);
+                    command.Parameters.AddWithValue("@Subtotal", Subtotal);
+                    command.Parameters.AddWithValue("@TotalImpuestos", TotalImp);
+                    command.Parameters.AddWithValue("@Total", Total);
+
+                    command.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al insertar el documento: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        public int GetIdDocumento()
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("GetIdDoc", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    object result = command.ExecuteScalar();
+
+                    if (result != DBNull.Value && result != null)
+                    {
+                        return Convert.ToInt32(result);
+                    }
+                    else
+                    {
+                        // Si no se encontró ningún idDocumento en la tabla
+                        return -1;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener el idDocumento: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return -1;
+            }
+        }
+
+        public bool restaCantidadProducto(int idProducto, decimal cantidadRestar)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("RestaCantidadProducto", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@idProducto", idProducto);
+                    command.Parameters.AddWithValue("@CantidadResta", cantidadRestar);
+
+
+                    command.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al restar la cantidad del producto a facturar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        public DataTable GetDocumentos()
+        {
+            DataTable documentosData = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("GetDocumentos", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        documentosData = dataTable;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK);
+            }
+
+            return documentosData;
+        }
+
+        public DataTable GetProductosByIdDocumento(int idDocumento)
+        {
+            DataTable productosData = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("GetProductosByIdDocumento", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@idDocumento", idDocumento);
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        productosData = dataTable;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK);
+            }
+            return productosData;
+        }
+
+        public bool sumaCantidadProducto(int idProducto, decimal cantidadSumar)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("SumaCantidadProducto", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@idProducto", idProducto);
+                    command.Parameters.AddWithValue("@CantidadSuma", cantidadSumar);
+
+
+                    command.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al restar la cantidad del producto a facturar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
     }
 }
