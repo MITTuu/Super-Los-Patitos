@@ -492,5 +492,118 @@ namespace Prototipo.Modelo
                 return false;
             }
         }
+
+
+        public bool InsertProducto(string codigo, string descripcion, double precio, int cantidad, int medida)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("InsertProducto", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@Nombre", descripcion);
+                    command.Parameters.AddWithValue("@Codigo", codigo);
+                    command.Parameters.AddWithValue("@PrecioUnitario", precio);
+                    command.Parameters.AddWithValue("@Cantidad", cantidad);
+                    command.Parameters.AddWithValue("@idUnidadMedida", medida);
+
+                    command.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK);
+                return false;
+            }
+        }
+
+        public DataTable GetProductoBySearch(string busqueda)
+        {
+            DataTable dt = new DataTable();
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("SelectProductoCoincidencia", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@busqueda", busqueda);
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    adapter.Fill(dt);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK);
+            }
+
+            return dt;
+        }
+
+        /// <summary>
+        /// Inserta un ajuste en la BD
+        /// </summary>
+        /// <param name="razon"></param>
+        /// <param name="idPersonalResponsable"></param>
+        /// <returns>ID del ajuste generado, -1 en caso de error</returns>
+        public int InsertAjuste(string razon, int idPersonalResponsable)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("InsertAjuste", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@Razon", razon);
+                    command.Parameters.AddWithValue("@idPersonal", idPersonalResponsable);
+
+                    int.TryParse(command.ExecuteScalar().ToString(), out int idAjuste);
+                    return idAjuste;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK);
+                return -1;
+            }
+        }
+
+        public bool InsertAjusteProducto(int idProducto, int cantidadAjuste, int idAjuste)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("InsertAjusteProducto", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@idProducto", idProducto);
+                    command.Parameters.AddWithValue("@CantidadAjustada", cantidadAjuste);
+                    command.Parameters.AddWithValue("@idAjuste", idAjuste);
+
+                    command.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK);
+                return false;
+            }
+        }
     }
 }

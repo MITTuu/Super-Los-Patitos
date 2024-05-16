@@ -111,7 +111,12 @@ namespace Prototipo.Prototipo
         }
         private void btnAjustesI_Click(object sender, EventArgs e)
         {
-            abrir_Ventana(new Inventario());
+            abrir_Ventana(new Inventario(idRol));
+        }
+
+        private void btAjusteInventario_Click(object sender, EventArgs e)
+        {
+            abrir_Ventana(new AjusteInventario((int) personalData["idPersonal"]));
         }
 
         private void btnNC_Click(object sender, EventArgs e)

@@ -88,12 +88,17 @@ CREATE TABLE Lineas (
 
 -- Crear la tabla Ajustes
 CREATE TABLE Ajustes (
-    AjusteId INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    idAjuste INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
     FechaAjuste DATE NOT NULL,
-    idProducto INT FOREIGN KEY REFERENCES Productos(idProducto) NOT NULL,
-    CantidadAjustada INT NOT NULL,
     Razon VARCHAR(200) NOT NULL,
     idPersonal INT FOREIGN KEY REFERENCES Personal(idPersonal) NOT NULL
+);
+
+CREATE TABLE AjustesProducto (
+    idAjusteProducto INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    idProducto INT FOREIGN KEY REFERENCES Productos(idProducto) NOT NULL,
+    CantidadAjustada INT NOT NULL,
+    idAjuste INT FOREIGN KEY REFERENCES Ajustes(idAjuste) NOT NULL
 );
 
 -- Datos insertados por defecto
@@ -125,6 +130,7 @@ INSERT INTO UnidadesMedida (idUnidadMedida, UnidadMedida)
 -- ADMIN
 INSERT INTO Personal (Nombre, PrimerApellido, SegundoApellido, Correo, Contrasena, Telefono, Identificacion, idTipoIdentificacion, idRol)
 VALUES
+    ('Oscar', 'Roni', 'Ordoñez', 'oscar.gt.140.ro@gmail.com', '1212', '88888888', '119030573', 1, 1),
 	('Dylan', 'Montiel', 'Zúñiga', 'dylanmmz01@gmail.com', 'Dylan.1234', '62609932', '703050437', 1, 1);
 
 -- Insertar productos

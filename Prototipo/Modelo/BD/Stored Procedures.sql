@@ -83,6 +83,63 @@ BEGIN
     VALUES (@Nombre, @PrimerApellido, @SegundoApellido, @Correo, @Telefono, @Identificacion, @idTipoIdentificacion);
 END;
 
+-- Insertar un nuevo producto en la BD
+CREATE PROCEDURE InsertProducto
+    @Nombre VARCHAR(100),
+    @Codigo VARCHAR(50),
+    @PrecioUnitario DECIMAL(10,2),
+    @Cantidad INT,
+    @idUnidadMedida INT
+AS
+BEGIN
+    INSERT INTO Productos (Nombre, Codigo, PrecioUnitario, Cantidad, idUnidadMedida)
+    VALUES (@Nombre, @Codigo, @PrecioUnitario, @Cantidad, @idUnidadMedida);
+END;
+
+-- Seleccionar los productos que tengan coincidencias con la busqueda
+CREATE PROCEDURE SelectProductoCoincidencia
+    @busqueda VARCHAR(100)
+AS
+BEGIN
+    SELECT idProducto AS ID, Nombre, Codigo, CONCAT(PrecioUnitario, '/', SUBSTRING(u.UnidadMedida, 0, 4)) AS Precio, Cantidad
+    FROM Productos AS p
+    INNER JOIN UnidadesMedida AS u ON p.idUnidadMedida = u.idUnidadMedida
+    WHERE Nombre LIKE CONCAT('%',@busqueda,'%');
+END
+
+-- insertar un ajuste de inventario
+CREATE PROCEDURE InsertAjuste
+    @Razon VARCHAR(255),
+    @idPersonal INT
+AS
+BEGIN
+    INSERT INTO Ajustes
+        (FechaAjuste, Razon, idPersonal)
+        VALUES
+        (CURRENT_TIMESTAMP, @Razon, @idPersonal);
+    SELECT SCOPE_IDENTITY();
+END
+
+-- Insertar un ajuste individual de producto
+CREATE PROCEDURE InsertAjusteProducto
+    @idProducto INT,
+    @CantidadAjustada INT,
+    @idAjuste INT
+AS
+BEGIN
+    -- insertar ajuste
+    INSERT INTO AjustesProducto
+        (idProducto, CantidadAjustada, idAjuste)
+        VALUES
+        (@idProducto, @CantidadAjustada, @idAjuste);
+    
+    -- modificar inventario
+    UPDATE Productos
+        SET Cantidad = (Cantidad + @CantidadAjustada)
+        WHERE idProducto = @idProducto;
+END
+END;
+
 -- Stored Procedures Productos
 -- Obtener los datos de los productos 
 CREATE PROCEDURE GetProductos
