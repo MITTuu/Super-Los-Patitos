@@ -102,7 +102,6 @@ CREATE TABLE AjustesProducto (
 );
 
 -- Datos insertados por defecto
-
 INSERT INTO Roles (idRol, Rol)
 	VALUES
 	(1, 'Administrador'),
@@ -133,3 +132,65 @@ INSERT INTO Personal (Nombre, PrimerApellido, SegundoApellido, Correo, Contrasen
 VALUES
     ('Oscar', 'Roni', 'Ordoñez', 'oscar.gt.140.ro@gmail.com', '1212', '88888888', '119030573', 1, 1),
 	('Dylan', 'Montiel', 'Zúñiga', 'dylanmmz01@gmail.com', 'Dylan.1234', '62609932', '703050437', 1, 1);
+
+-- Insertar productos
+INSERT INTO Productos (Nombre, Codigo, PrecioUnitario, Cantidad, idUnidadMedida)
+VALUES
+    ('Atún Azul 400g', 'ATN001', 10.99, 100, 1),
+    ('Costillas de cerdo BBQ', 'CDC002', 15.50, 50, 2),
+    ('Aceite suli 900ml', 'ACS003', 8.75, 200, 1),
+    ('Tomate rojo', 'TMR004', 12.25, 75, 2),
+    ('Coca cola cero azucar 2.5L', 'CCA005', 20.00, 150, 1),
+    ('Pepsi 2.5L', 'PPS006', 9.99, 120, 2);
+
+UPDATE Productos
+SET idUnidadMedida = 1
+WHERE Nombre = 'Pepsi 2.5L';
+
+-- Agregar una nueva columna temporal para la cantidad como DECIMAL
+ALTER TABLE Productos
+ADD CantidadTemp DECIMAL(10,3) NULL;
+
+-- Actualizar la nueva columna temporal con los valores convertidos de la columna existente
+UPDATE Productos
+SET CantidadTemp = CAST(Cantidad AS DECIMAL(10,3));
+
+-- Eliminar la columna existente Cantidad
+ALTER TABLE Productos
+DROP COLUMN Cantidad;
+
+-- Renombrar la columna temporal como Cantidad
+EXEC sp_rename 'Productos.CantidadTemp', 'Cantidad', 'COLUMN';
+
+SELECT * FROM Productos
+
+ALTER TABLE Lineas
+DROP CONSTRAINT FK__Lineas__idDocume__52593CB8;
+
+ALTER TABLE Lineas
+ALTER COLUMN idDocumento INT NOT NULL;  
+
+ALTER TABLE Lineas
+ALTER COLUMN Cantidad DECIMAL(10,3) NOT NULL;
+
+ALTER TABLE Documentos
+ADD Estado BIT NOT NULL;
+
+ALTER TABLE Lineas
+ADD Estado BIT NOT NULL;
+
+DELETE FROM Lineas
+DELETE FROM Documentos
+
+SELECT * FROM Productos
+SELECT * FROM Lineas
+SELECT * FROM Documentos
+
+SELECT MAX(idDocumento)
+FROM Documentos
+
+
+UPDATE Productos
+SET Cantidad = Cantidad - 10
+WHERE idProducto = 1
+

@@ -91,6 +91,12 @@
     <Compile Include="Prototipo\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Prototipo\NotasDeCredito.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Prototipo\NotasDeCredito.Designer.cs">
+      <DependentUpon>NotasDeCredito.cs</DependentUpon>
+    </Compile>
     <Compile Include="Prototipo\PantallaPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Prototipo\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Prototipo\NotasDeCredito.resx">
+      <DependentUpon>NotasDeCredito.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Prototipo\PantallaPrincipal.resx">
       <DependentUpon>PantallaPrincipal.cs</DependentUpon>

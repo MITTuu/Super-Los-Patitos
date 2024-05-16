@@ -119,6 +119,11 @@ namespace Prototipo.Prototipo
             abrir_Ventana(new AjusteInventario((int) personalData["idPersonal"]));
         }
 
+        private void btnNC_Click(object sender, EventArgs e)
+        {
+            abrir_Ventana(new NotasDeCredito(personalData));
+        }
+
         //Abrir otro form pero en un form 
         private void abrir_Ventana(object nuevaVentana)
         {
@@ -152,6 +157,10 @@ namespace Prototipo.Prototipo
             if (resultado == DialogResult.Yes)
             {
                 l.Close();
+            }
+            else if (resultado == DialogResult.No)
+            {
+                e.Cancel = true;
             }
         }
     }

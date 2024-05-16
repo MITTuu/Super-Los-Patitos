@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.cbTipoI = new System.Windows.Forms.ComboBox();
             this.btnCrear = new System.Windows.Forms.Button();
             this.tbTelefono = new System.Windows.Forms.TextBox();
@@ -44,7 +45,6 @@
             this.lbApellido1 = new System.Windows.Forms.Label();
             this.tbNombre = new System.Windows.Forms.TextBox();
             this.lbNombre = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,6 +71,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1192, 630);
             this.panel1.TabIndex = 5;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(41, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(220, 32);
+            this.label1.TabIndex = 23;
+            this.label1.Text = "Registrar cliente";
             // 
             // cbTipoI
             // 
@@ -217,16 +227,6 @@
             this.lbNombre.TabIndex = 1;
             this.lbNombre.Text = "Nombre";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(41, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(220, 32);
-            this.label1.TabIndex = 23;
-            this.label1.Text = "Registrar cliente";
-            // 
             // RegistrarCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -238,6 +238,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RegistrarCliente";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RegistrarCliente_FormClosing);
+            this.Load += new System.EventHandler(this.RegistrarCliente_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

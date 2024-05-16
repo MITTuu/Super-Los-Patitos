@@ -79,8 +79,6 @@ namespace Prototipo.Prototipo
             }
 
             CrearCliente(nombre, apellido1, apellido2, correo, telefono, identificacion, tipoIdentificacion);
-
-            MessageBox.Show("Cliente creado correctamente.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void CrearCliente(string nombre, string apellido1, string apellido2, string correo, string telefono, string identificacion, int tipoI)
@@ -114,6 +112,11 @@ namespace Prototipo.Prototipo
             {
                 e.Cancel = true;
             }
+        }
+
+        private void RegistrarCliente_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
