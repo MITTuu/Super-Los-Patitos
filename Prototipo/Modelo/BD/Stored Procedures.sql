@@ -458,5 +458,14 @@ BEGIN
         COUNT(d.idDocumento) DESC;
 END;
 
-
-
+-- Info para grafico de ventas
+CREATE PROCEDURE GetVentasGrafico
+AS
+BEGIN
+    SELECT FechaCreacion AS Fecha, SUM(l.Cantidad) AS Ventas
+    FROM Lineas AS l
+    INNER JOIN Documentos AS d ON l.idDocumento = d.idDocumento
+    WHERE FechaCreacion >= DATEADD(DAY, -7, GETDATE())
+    GROUP BY FechaCreacion
+    ORDER BY FechaCreacion DESC
+END
