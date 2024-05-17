@@ -840,5 +840,36 @@ namespace Prototipo.Modelo
 
             return clientesData;
         }
+
+        public DataTable GetVentasGrafico()
+        {
+            DataTable dt = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("GetVentasGrafico", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        dt = dataTable;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK);
+            }
+
+            return dt;
+        }
     }
 }
