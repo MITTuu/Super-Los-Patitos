@@ -36,5 +36,7 @@ namespace Prototipo.Prototipo
             lRazon.Text = infoAjuste["Razon"].ToString();
             dgvProductosAjuste.DataSource = tablaAjustesProductos;
         }
+
+
     }
 }

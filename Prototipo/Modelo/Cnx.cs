@@ -519,7 +519,7 @@ namespace Prototipo.Modelo
         }
 
 
-        public bool InsertProducto(string codigo, string descripcion, double precio, int cantidad, int medida)
+        public bool InsertProducto(string codigo, string descripcion, double precio, Decimal cantidad, int medida)
         {
             try
             {
@@ -530,6 +530,35 @@ namespace Prototipo.Modelo
                     SqlCommand command = new SqlCommand("InsertProducto", connection);
                     command.CommandType = CommandType.StoredProcedure;
 
+                    command.Parameters.AddWithValue("@Nombre", descripcion);
+                    command.Parameters.AddWithValue("@Codigo", codigo);
+                    command.Parameters.AddWithValue("@PrecioUnitario", precio);
+                    command.Parameters.AddWithValue("@Cantidad", cantidad);
+                    command.Parameters.AddWithValue("@idUnidadMedida", medida);
+
+                    command.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK);
+                return false;
+            }
+        }
+
+        public bool ModifyProducto(int idProducto, string codigo, string descripcion, double precio, Decimal cantidad, int medida)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("ModifyProducto", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@idProducto", idProducto);
                     command.Parameters.AddWithValue("@Nombre", descripcion);
                     command.Parameters.AddWithValue("@Codigo", codigo);
                     command.Parameters.AddWithValue("@PrecioUnitario", precio);
@@ -605,7 +634,7 @@ namespace Prototipo.Modelo
             }
         }
 
-        public bool InsertAjusteProducto(int idProducto, int cantidadAjuste, int idAjuste)
+        public bool InsertAjusteProducto(int idProducto, Decimal cantidadAjuste, int idAjuste)
         {
             try
             {

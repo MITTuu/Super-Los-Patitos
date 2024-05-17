@@ -80,20 +80,22 @@
             // 
             // nudCantidadAjuste
             // 
+            this.nudCantidadAjuste.DecimalPlaces = 3;
             this.nudCantidadAjuste.Location = new System.Drawing.Point(202, 259);
             this.nudCantidadAjuste.Maximum = new decimal(new int[] {
-            99999,
+            1215752191,
+            23,
             0,
-            0,
-            0});
+            196608});
             this.nudCantidadAjuste.Minimum = new decimal(new int[] {
-            99999,
+            1215752191,
+            23,
             0,
-            0,
-            -2147483648});
+            -2147287040});
             this.nudCantidadAjuste.Name = "nudCantidadAjuste";
             this.nudCantidadAjuste.Size = new System.Drawing.Size(120, 20);
             this.nudCantidadAjuste.TabIndex = 16;
+            this.nudCantidadAjuste.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nudCantidadAjuste_KeyPress);
             // 
             // label4
             // 
@@ -130,6 +132,7 @@
             this.dgvProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProductos.Size = new System.Drawing.Size(427, 123);
             this.dgvProductos.TabIndex = 11;
+            this.dgvProductos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductos_CellClick);
             // 
             // pnTitulo
             // 

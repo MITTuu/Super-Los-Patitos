@@ -86,7 +86,7 @@ CREATE TABLE NotasCreditoDocumentos (
 CREATE TABLE Lineas (
     idLinea INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
     idDocumento INT FOREIGN KEY REFERENCES Documentos(idDocumento) NOT NULL,
-    Cantidad INT NOT NULL,
+    Cantidad DECIMAL(10,3) NOT NULL,
     idProducto INT FOREIGN KEY REFERENCES Productos(idProducto) NOT NULL,
     Subtotal DECIMAL(10,2) NOT NULL,
     Impuesto DECIMAL(10,2) NOT NULL,
@@ -104,7 +104,7 @@ CREATE TABLE Ajustes (
 CREATE TABLE AjustesProducto (
     idAjusteProducto INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
     idProducto INT FOREIGN KEY REFERENCES Productos(idProducto) NOT NULL,
-    CantidadAjustada INT NOT NULL,
+    CantidadAjustada DECIMAL(10,3) NOT NULL,
     idAjuste INT FOREIGN KEY REFERENCES Ajustes(idAjuste) NOT NULL
 );
 

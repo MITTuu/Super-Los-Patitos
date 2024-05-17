@@ -51,7 +51,7 @@ namespace Prototipo.Prototipo
                 return;
             }
             double.TryParse(precioText, out double precio);
-            int.TryParse(cantidadText, out int cantidad);
+            Decimal.TryParse(cantidadText, out Decimal cantidad);
             int medida = dicMedidas[medidaText];
 
 
@@ -127,16 +127,20 @@ namespace Prototipo.Prototipo
         /// </summary>
         /// <param name="tb"></param>
         /// <param name="max"></param>
-        private void FixDecimalTextBox(TextBox tb, double max)
+        private void FixDecimalTextBox(TextBox tb, double max, int decimalDigits)
         {
             Double.TryParse(tb.Text, out Double value);
             if (value > max) tb.Text = max.ToString();
             else
             {
-                tb.Text = value.ToString("0.##");
+                tb.Text = value.ToString("0." + new string('#', decimalDigits));
             }
         }
 
+        private void FixDecimalTextBox(TextBox tb, double max)
+        {
+            FixDecimalTextBox(tb, max, 2);
+        }
 
         private void tbPrecioU_Leave(object sender, EventArgs e)
         {
@@ -150,7 +154,14 @@ namespace Prototipo.Prototipo
 
         private void tbCantidad_Leave(object sender, EventArgs e)
         {
-            FixDecimalTextBox(tbCantidad, 99999999);
+            if (cbTipoMedida.Text == "unidad")
+            {
+                FixDecimalTextBox(tbCantidad, 999999999, 0);
+            }
+            else
+            {
+                FixDecimalTextBox(tbCantidad, 999999999.999, 3);
+            }
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -165,8 +176,39 @@ namespace Prototipo.Prototipo
 
         private void dgvProductos_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            EditarProducto EP = new EditarProducto();
-            EP.Show();
+            string idProducto = dgvProductos.SelectedRows[0].Cells["ID"].Value.ToString();
+            string nombre = dgvProductos.SelectedRows[0].Cells["Nombre"].Value.ToString();
+            string codigo = dgvProductos.SelectedRows[0].Cells["Codigo"].Value.ToString();
+            string precio = dgvProductos.SelectedRows[0].Cells["Precio"].Value.ToString();
+            string medida = dgvProductos.SelectedRows[0].Cells["Medida"].Value.ToString();
+            string cantidad = dgvProductos.SelectedRows[0].Cells["Cantidad"].Value.ToString();
+            EditarProducto EP = new EditarProducto(idProducto, nombre, codigo, precio, medida, cantidad);
+            EP.ShowDialog();
+            BuscarProducto();
+        }
+
+        private void tbCantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (cbTipoMedida.Text == "unidad")
+            {
+                CheckOnlyIntKeyPress(sender, e);
+            }
+            else
+            {
+                CheckOnlyDecimalKeyPress(sender, e);
+            }
+        }
+
+        private void cbTipoMedida_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbTipoMedida.Text == "unidad")
+            {
+                FixDecimalTextBox(tbCantidad, 999999999, 0);
+            }
+            else
+            {
+                FixDecimalTextBox(tbCantidad, 999999999.999);
+            }
         }
     }
 }
