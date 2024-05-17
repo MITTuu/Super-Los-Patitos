@@ -134,7 +134,36 @@ namespace Prototipo.Prototipo
 
         private void btnTop10Prod_Click(object sender, EventArgs e)
         {
+            informesData = conexion.GetTop10ProductosUltimoMes();
 
+            if (informesData == null)
+            {
+                MessageBox.Show("No se obtuvieron ventas del último mes.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (informesData != null)
+            {
+                // Cargar la información de la consulta en el dgv
+                DGVInforme.DataSource = informesData;
+
+                DGVInforme.DefaultCellStyle.ForeColor = Color.Black;
+
+                // Organizar las columnas
+                DGVInforme.Columns["idProducto"].DisplayIndex = 0;
+                DGVInforme.Columns["NombreProducto"].DisplayIndex = 1;
+                DGVInforme.Columns["CantidadVendida"].DisplayIndex = 2;
+
+                // Auto size
+                DGVInforme.Columns["idProducto"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                DGVInforme.Columns["NombreProducto"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                DGVInforme.Columns["CantidadVendida"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+
+                // Encabezado
+                DGVInforme.Columns["idProducto"].HeaderText = "Identificador";
+                DGVInforme.Columns["NombreProducto"].HeaderText = "Producto";
+                DGVInforme.Columns["CantidadVendida"].HeaderText = "Cantidad vendida";
+            }
         }
 
         private void productoMasVendido()
@@ -183,7 +212,7 @@ namespace Prototipo.Prototipo
                 // Encabezado
                 DGVClientes.Columns["Identificacion"].HeaderText = "Identificación";
                 DGVClientes.Columns["NombreCompleto"].HeaderText = "Nombre completo";
-                DGVClientes.Columns["CantidadDocumentos"].HeaderText = "Documentos";
+                DGVClientes.Columns["CantidadDocumentos"].HeaderText = "Total de compras";
 
                 // Auto size
                 DGVClientes.Columns["Identificacion"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;

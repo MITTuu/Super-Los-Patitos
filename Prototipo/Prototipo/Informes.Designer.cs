@@ -50,14 +50,14 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.lbCantidad = new System.Windows.Forms.Label();
+            this.lbProducto = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.lbProducto = new System.Windows.Forms.Label();
-            this.lbCantidad = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.DGVClientes = new System.Windows.Forms.DataGridView();
             this.panel9 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
-            this.DGVClientes = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVInforme)).BeginInit();
@@ -66,8 +66,8 @@
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel8.SuspendLayout();
-            this.panel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGVClientes)).BeginInit();
+            this.panel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -278,7 +278,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(443, 22);
             this.label4.TabIndex = 0;
-            this.label4.Text = "Top 10 productos mas vendidos en los últimos 30 días";
+            this.label4.Text = "Top 10 productos más vendidos en los últimos 30 días";
             // 
             // panel6
             // 
@@ -290,6 +290,26 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(766, 103);
             this.panel6.TabIndex = 10;
+            // 
+            // lbCantidad
+            // 
+            this.lbCantidad.AutoSize = true;
+            this.lbCantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCantidad.Location = new System.Drawing.Point(472, 54);
+            this.lbCantidad.Name = "lbCantidad";
+            this.lbCantidad.Size = new System.Drawing.Size(155, 22);
+            this.lbCantidad.TabIndex = 3;
+            this.lbCantidad.Text = "Cantidad vendida:";
+            // 
+            // lbProducto
+            // 
+            this.lbProducto.AutoSize = true;
+            this.lbProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbProducto.Location = new System.Drawing.Point(32, 54);
+            this.lbProducto.Name = "lbProducto";
+            this.lbProducto.Size = new System.Drawing.Size(87, 22);
+            this.lbProducto.TabIndex = 2;
+            this.lbProducto.Text = "Producto:";
             // 
             // panel7
             // 
@@ -308,29 +328,9 @@
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label2.Location = new System.Drawing.Point(3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(197, 22);
+            this.label2.Size = new System.Drawing.Size(188, 22);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Productos más vendido";
-            // 
-            // lbProducto
-            // 
-            this.lbProducto.AutoSize = true;
-            this.lbProducto.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbProducto.Location = new System.Drawing.Point(32, 54);
-            this.lbProducto.Name = "lbProducto";
-            this.lbProducto.Size = new System.Drawing.Size(87, 22);
-            this.lbProducto.TabIndex = 2;
-            this.lbProducto.Text = "Producto:";
-            // 
-            // lbCantidad
-            // 
-            this.lbCantidad.AutoSize = true;
-            this.lbCantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCantidad.Location = new System.Drawing.Point(472, 54);
-            this.lbCantidad.Name = "lbCantidad";
-            this.lbCantidad.Size = new System.Drawing.Size(155, 22);
-            this.lbCantidad.TabIndex = 3;
-            this.lbCantidad.Text = "Cantidad vendida:";
+            this.label2.Text = "Producto más vendido";
             // 
             // panel8
             // 
@@ -341,27 +341,6 @@
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(750, 268);
             this.panel8.TabIndex = 11;
-            // 
-            // panel9
-            // 
-            this.panel9.BackColor = System.Drawing.SystemColors.Highlight;
-            this.panel9.Controls.Add(this.label7);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel9.Location = new System.Drawing.Point(0, 0);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(748, 30);
-            this.panel9.TabIndex = 1;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label7.Location = new System.Drawing.Point(3, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(270, 22);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "Top 5 clientes que más compran";
             // 
             // DGVClientes
             // 
@@ -396,6 +375,27 @@
             this.DGVClientes.Size = new System.Drawing.Size(748, 236);
             this.DGVClientes.TabIndex = 12;
             // 
+            // panel9
+            // 
+            this.panel9.BackColor = System.Drawing.SystemColors.Highlight;
+            this.panel9.Controls.Add(this.label7);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel9.Location = new System.Drawing.Point(0, 0);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(748, 30);
+            this.panel9.TabIndex = 1;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label7.Location = new System.Drawing.Point(3, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(270, 22);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Top 5 clientes que más compran";
+            // 
             // Informes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -426,9 +426,9 @@
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             this.panel8.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DGVClientes)).EndInit();
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGVClientes)).EndInit();
             this.ResumeLayout(false);
 
         }
