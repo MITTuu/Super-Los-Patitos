@@ -1,4 +1,5 @@
 ﻿using Prototipo.Modelo;
+using Prototipo.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
+
+using iTextSharp.text;
+using System.IO;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
 
 namespace Prototipo.Prototipo
 {
@@ -96,7 +103,7 @@ namespace Prototipo.Prototipo
                     if (idUM == "1")
                     {
                         lbTU.Text = "c/u";
-                    } 
+                    }
                     if (idUM == "2")
                     {
                         lbTU.Text = "kg";
@@ -437,9 +444,9 @@ namespace Prototipo.Prototipo
             decimal totalGeneral = totalSubtotal + totalImpuesto;
 
             // Mostrar los totales en controles de la interfaz de usuario (por ejemplo, TextBox o Label)
-            lbSubtotal.Text = "Subtotal: " + totalSubtotal.ToString("C"); 
-            lbImpuesto.Text = "Impuesto: " + totalImpuesto.ToString("C"); 
-            lbTotal.Text = "Total: " + totalGeneral.ToString("C"); 
+            lbSubtotal.Text = "Subtotal: " + totalSubtotal.ToString("C");
+            lbImpuesto.Text = "Impuesto: " + totalImpuesto.ToString("C");
+            lbTotal.Text = "Total: " + totalGeneral.ToString("C");
             lbCantProd.Text = "Cantidad de productos a facturar: " + cantidadProd.ToString();
         }
 
@@ -516,6 +523,9 @@ namespace Prototipo.Prototipo
             }
 
             int idDocumento = conexion.GetIdDocumento();
+            Subtotal = 0;
+            TotalImp = 0;
+            Total = 0;
 
             // Recorrer cada fila en el DataGridView de la factura (DGVFactura)
             foreach (DataGridViewRow row in DGVFactura.Rows)
@@ -549,6 +559,11 @@ namespace Prototipo.Prototipo
                 }
             }
 
+            if (idTipoDocumento == 1)
+            {
+                generarFacturaPDF();
+            }
+
             MessageBox.Show("Factura registrada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             DGVFactura.Rows.Clear();
@@ -560,6 +575,120 @@ namespace Prototipo.Prototipo
             CalcularTotales();
             actualizarConsecutivo();
             cargarProductos();
+        }
+
+        private void generarFacturaPDF()
+        {
+            DialogResult resultado = MessageBox.Show("¿Desea generar la factura elétronica?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.No)
+            {
+                return;
+            }
+
+            try
+            {
+                string plantillaHTML = Properties.Resources.Plantilla.ToString();
+                string nombreCliente = clienteData["Nombre"].ToString() + " " + clienteData["PrimerApellido"].ToString() + " " + clienteData["SegundoApellido"].ToString();
+                string nombrePersonal = personalData["Nombre"].ToString() + " " + personalData["PrimerApellido"].ToString() + " " + personalData["SegundoApellido"].ToString();
+
+                plantillaHTML = plantillaHTML.Replace("@COSECUTIVO", cosencutivo.ToString()); 
+                plantillaHTML = plantillaHTML.Replace("@CLIENTE", nombreCliente); 
+                plantillaHTML = plantillaHTML.Replace("@RESPONSABLE", nombrePersonal);
+                plantillaHTML = plantillaHTML.Replace("@DOCUMENTO", "Factura");
+                plantillaHTML = plantillaHTML.Replace("@FECHA", DateTime.Now.ToString("dd/MM/yyyy")); 
+
+                string filasProductos = string.Empty;
+                decimal subtotalTotal = 0;
+                decimal impuestoTotal = 0;
+                decimal total = 0;
+
+                // Iterar sobre las filas del DataGridView para agregar las líneas de productos a la factura
+                foreach (DataGridViewRow row in DGVFactura.Rows)
+                {
+                    string producto = row.Cells["Producto"].Value.ToString();
+                    decimal precioUnitario = Convert.ToDecimal(row.Cells["PrecioUnitario"].Value);
+                    decimal cantidad = Convert.ToDecimal(row.Cells["Cantidad"].Value);
+                    decimal subtotal = Convert.ToDecimal(row.Cells["Subtotal"].Value);
+                    decimal impuesto = Convert.ToDecimal(row.Cells["Impuesto"].Value);
+                    decimal totalLinea = Convert.ToDecimal(row.Cells["Total"].Value);
+
+                    filasProductos += $"<tr>" +
+                                       $"<td>{cantidad}</td>" +
+                                       $"<td>{producto}</td>" +
+                                       $"<td>{precioUnitario}</td>" +
+                                       $"<td>{subtotal}</td>" +
+                                       $"<td>{impuesto}</td>" +
+                                       $"<td>{totalLinea}</td>" +
+                                       $"</tr>";
+
+                    subtotalTotal += subtotal;
+                    impuestoTotal += impuesto;
+                    total += totalLinea;
+                }
+
+                plantillaHTML = plantillaHTML.Replace("@FILAS", filasProductos);
+                plantillaHTML = plantillaHTML.Replace("@TSUBTOTAL", subtotalTotal.ToString("C"));
+                plantillaHTML = plantillaHTML.Replace("@TIMPUESTO", impuestoTotal.ToString("C"));
+                plantillaHTML = plantillaHTML.Replace("@TTOTAL", total.ToString("C"));
+
+                string rutaFacturasGeneradas = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\FacturasGeneradas\");
+
+                // Verificar si el directorio de facturas generadas existe, si no, crearlo
+                if (!Directory.Exists(rutaFacturasGeneradas))
+                {
+                    Directory.CreateDirectory(rutaFacturasGeneradas);
+                }
+
+                string rutaArchivoPDF = Path.Combine(rutaFacturasGeneradas, $"Factura_{DateTime.Now.ToString("yyyyMMddHHmmss")}.pdf");
+
+                using (FileStream stream = new FileStream(rutaArchivoPDF, FileMode.Create))
+                {
+                    Document pdfDoc = new Document(PageSize.A4);
+                    PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+
+                    pdfDoc.Open();
+
+                    // Cargar la imagen desde los recursos
+                    System.Drawing.Bitmap bmp = Properties.Resources.SP_400_;
+                    iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance(bmp, System.Drawing.Imaging.ImageFormat.Png);
+
+                    img.SetAbsolutePosition(40, pdfDoc.PageSize.Height - 80); 
+                    img.ScaleAbsolute(90, 90); 
+
+                    PdfContentByte contentByte = writer.DirectContent;
+                    contentByte.AddImage(img);
+
+                    using (StringReader sr = new StringReader(plantillaHTML))
+                    {
+                        XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                    }
+
+                    pdfDoc.Close();
+                }
+
+                string From = "dylanmmz01@gmail.com";
+                string To = clienteData["Correo"].ToString();
+                string Message = "Saludos querido cliente, le adjuntamos la factura elétronica. Gracias por su compra.";
+                string Subject = "Factura Eléctronica";
+                List<string> lstArchivos = new List<string>();
+                lstArchivos.Add(rutaArchivoPDF);
+
+                EnviarCorreo enviarCorreo = new EnviarCorreo(From, To, Message, Subject, lstArchivos);
+
+                if (enviarCorreo.enviaMail())
+                {
+                    MessageBox.Show("Factura enviada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show($"Error al enviar el correo " + enviarCorreo.error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al generar la factura electrónica: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

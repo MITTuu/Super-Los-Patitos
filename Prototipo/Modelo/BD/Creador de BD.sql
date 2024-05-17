@@ -75,6 +75,13 @@ CREATE TABLE Documentos (
     Total DECIMAL(10,2) NULL
 );
 
+-- Crear la tabla NotasCreditoDocumentos
+CREATE TABLE NotasCreditoDocumentos (
+    idNotaCredito INT FOREIGN KEY REFERENCES Documentos(idDocumento) NOT NULL,
+    idDocumentoRelacionado INT FOREIGN KEY REFERENCES Documentos(idDocumento) NOT NULL,
+    PRIMARY KEY (idNotaCredito, idDocumentoRelacionado)
+);
+
 -- Crear la tabla Linea
 CREATE TABLE Lineas (
     idLinea INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
@@ -162,7 +169,7 @@ DROP COLUMN Cantidad;
 -- Renombrar la columna temporal como Cantidad
 EXEC sp_rename 'Productos.CantidadTemp', 'Cantidad', 'COLUMN';
 
-SELECT * FROM Productos
+SELECT * FROM Clientes
 
 ALTER TABLE Lineas
 DROP CONSTRAINT FK__Lineas__idDocume__52593CB8;

@@ -117,41 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ce" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ce.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Super los Patitos." type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Super los Patitos..png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SP(64)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SP(64).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="4213459-common-door-exit-logout-out-signout_115411" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\4213459-common-door-exit-logout-out-signout_115411.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="shutdown_102677" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\shutdown_102677.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SP(400)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SP(400).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="cs" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cs.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="cs1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cs.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="4213459-common-door-exit-logout-out-signout_1154111" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\4213459-common-door-exit-logout-out-signout_115411.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="4213459-common-door-exit-logout-out-signout_115411 (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\4213459-common-door-exit-logout-out-signout_115411 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SP(120)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SP(120).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Plantilla" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Modelo\Plantilla.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
 </root>

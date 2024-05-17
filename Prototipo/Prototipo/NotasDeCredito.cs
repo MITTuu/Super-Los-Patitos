@@ -191,6 +191,16 @@ namespace Prototipo.Prototipo
                         MessageBox.Show("Error al crear el documento: " + idDocumento, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
+
+                    int idNotaCredito = conexion.GetIdDocumento();
+
+                    bool insertRelacion = conexion.InsertNotasCreditoDocumentos(idNotaCredito, idDocumento);
+
+                    if (!insertRelacion)
+                    {
+                        MessageBox.Show("Error al crear la relación: " + idDocumento, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                 }
                 else
                 {
