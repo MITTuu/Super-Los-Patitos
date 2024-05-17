@@ -88,7 +88,7 @@ CREATE PROCEDURE InsertProducto
     @Nombre VARCHAR(100),
     @Codigo VARCHAR(50),
     @PrecioUnitario DECIMAL(10,2),
-    @Cantidad INT,
+    @Cantidad DECIMAL(10,3),
     @idUnidadMedida INT
 AS
 BEGIN
@@ -96,12 +96,31 @@ BEGIN
     VALUES (@Nombre, @Codigo, @PrecioUnitario, @Cantidad, @idUnidadMedida);
 END;
 
+-- Modificar producto
+CREATE PROCEDURE ModifyProducto
+    @idProducto INT,
+    @Nombre VARCHAR(100),
+    @Codigo VARCHAR(50),
+    @PrecioUnitario DECIMAL(10,2),
+    @Cantidad DECIMAL(10,3),
+    @idUnidadMedida INT
+AS
+BEGIN
+    UPDATE Productos
+    SET Nombre = @Nombre,
+    Codigo = @Codigo,
+    PrecioUnitario = @PrecioUnitario,
+    Cantidad = @Cantidad,
+    idUnidadMedida = @idUnidadMedida
+    WHERE idProducto = @idProducto
+END;
+
 -- Seleccionar los productos que tengan coincidencias con la busqueda
 CREATE PROCEDURE SelectProductoCoincidencia
     @busqueda VARCHAR(100)
 AS
 BEGIN
-    SELECT idProducto AS ID, Nombre, Codigo, CONCAT(PrecioUnitario, '/', SUBSTRING(u.UnidadMedida, 0, 4)) AS Precio, Cantidad
+    SELECT idProducto AS ID, Nombre, Codigo, PrecioUnitario AS Precio, u.UnidadMedida AS Medida, Cantidad
     FROM Productos AS p
     INNER JOIN UnidadesMedida AS u ON p.idUnidadMedida = u.idUnidadMedida
     WHERE Nombre LIKE CONCAT('%',@busqueda,'%');
@@ -123,7 +142,7 @@ END
 -- Insertar un ajuste individual de producto
 CREATE PROCEDURE InsertAjusteProducto
     @idProducto INT,
-    @CantidadAjustada INT,
+    @CantidadAjustada Decimal(10,3),
     @idAjuste INT
 AS
 BEGIN
@@ -146,7 +165,7 @@ BEGIN
     SELECT idAjuste AS [ID], a.FechaAjuste AS [Fecha], a.Razon, CONCAT_WS(' ', p.Nombre, p.PrimerApellido) AS [Responsable]
     FROM Ajustes AS a
     LEFT JOIN Personal AS p ON a.idPersonal = p.idPersonal
-    ORDER BY FechaAjuste DESC
+    ORDER BY idAjuste DESC
 END
 
 -- Selecciona la info de 1 por medio de su ID

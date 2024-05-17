@@ -214,7 +214,7 @@
             this.tbCantidad.Size = new System.Drawing.Size(72, 24);
             this.tbCantidad.TabIndex = 12;
             this.tbCantidad.Text = "0";
-            this.tbCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CheckOnlyIntKeyPress);
+            this.tbCantidad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCantidad_KeyPress);
             this.tbCantidad.Leave += new System.EventHandler(this.tbCantidad_Leave);
             // 
             // cbTipoMedida
@@ -230,6 +230,7 @@
             this.cbTipoMedida.Name = "cbTipoMedida";
             this.cbTipoMedida.Size = new System.Drawing.Size(108, 25);
             this.cbTipoMedida.TabIndex = 3;
+            this.cbTipoMedida.SelectedIndexChanged += new System.EventHandler(this.cbTipoMedida_SelectedIndexChanged);
             // 
             // btnAgregar
             // 

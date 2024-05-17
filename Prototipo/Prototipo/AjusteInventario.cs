@@ -19,6 +19,7 @@ namespace Prototipo.Prototipo
         DataTable tablaProductosAjuste;
         DataTable tablaAjustes;
         int idPersonal;
+        string medidaSeleccionada;
 
         public AjusteInventario(int idPersonal)
         {
@@ -39,6 +40,7 @@ namespace Prototipo.Prototipo
         {
             string busqueda = tbBusqueda.Text;
             tablaProductos = conexion.GetProductoBySearch(busqueda);
+            tablaProductos.Columns.Remove("Codigo");
             tablaProductos.Columns.Remove("Precio");
             dgvProductos.DataSource = tablaProductos.DefaultView;
         }
@@ -73,10 +75,16 @@ namespace Prototipo.Prototipo
             }
 
             // Agregar producto a la lista de ajustes por guardar
-            int cantidadAjuste = (int) nudCantidadAjuste.Value;
-            int cantidadActual = (int) dgvProductos.SelectedRows[0].Cells["Cantidad"].Value;
+            Decimal.TryParse(nudCantidadAjuste.Value.ToString(), out Decimal cantidadAjuste);
+            Decimal.TryParse(dgvProductos.SelectedRows[0].Cells["Cantidad"].Value.ToString(), out Decimal cantidadActual);
             int idProducto = (int) dgvProductos.SelectedRows[0].Cells["ID"].Value;
             string nombreProducto = dgvProductos.SelectedRows[0].Cells["Nombre"].Value.ToString();
+
+            // Ajustar cantidad si es unitario (sin decimales)
+            if (medidaSeleccionada == "unidad")
+            {
+                cantidadAjuste = Math.Floor(cantidadAjuste);
+            }
 
             // Validar resta mayor a la cantidad actual
             if (cantidadActual + cantidadAjuste < 0 )
@@ -100,6 +108,13 @@ namespace Prototipo.Prototipo
 
         private void btnGaurdarAjuste_Click(object sender, EventArgs e)
         {
+            // Validar exitencia de info
+            if (tablaProductosAjuste.Rows.Count == 0 || tbRazon.Text == "") 
+            {
+                MessageBox.Show("No hay suficiente información para guardar el ajuste", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             // Traer info
             string razon = tbRazon.Text;
 
@@ -112,7 +127,7 @@ namespace Prototipo.Prototipo
             for (int i = 0; i < tablaProductosAjuste.Rows.Count; i++)
             {
                 int.TryParse(tablaProductosAjuste.Rows[i]["ID"].ToString(), out int idProducto);
-                int.TryParse(tablaProductosAjuste.Rows[i]["Ajuste"].ToString(), out int cantidadAjuste);
+                Decimal.TryParse(tablaProductosAjuste.Rows[i]["Ajuste"].ToString(), out Decimal cantidadAjuste);
 
                 conexion.InsertAjusteProducto(idProducto, cantidadAjuste, idAjuste);
             }
@@ -140,6 +155,17 @@ namespace Prototipo.Prototipo
             int idAjuste = (int) dgvAjustes.SelectedRows[0].Cells["ID"].Value;
             DetalleAjuste detalleAjusteWindow = new DetalleAjuste(idAjuste);
             detalleAjusteWindow.ShowDialog();
+        }
+
+        private void dgvProductos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int selectedIndex = dgvProductos.SelectedRows[0].Index;
+            medidaSeleccionada = tablaProductos.Rows[selectedIndex]["Medida"].ToString();
+        }
+
+        private void nudCantidadAjuste_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
         }
     }
 }
