@@ -192,6 +192,7 @@ DELETE FROM Documentos
 SELECT * FROM Productos
 SELECT * FROM Lineas
 SELECT * FROM Documentos
+SELECT * FROM NotasCreditoDocumentos
 
 SELECT MAX(idDocumento)
 FROM Documentos

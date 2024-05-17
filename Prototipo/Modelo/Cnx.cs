@@ -715,5 +715,101 @@ namespace Prototipo.Modelo
 
             return infoAjuste;
         }
+
+        public DataTable GetDocumentosIF(DateTime fechaInicio, DateTime fechaFin)
+        {
+            DataTable documentosData = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("GetDocumentosFI", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.Add(new SqlParameter("@FechaInicio", fechaInicio));
+                    command.Parameters.Add(new SqlParameter("@FechaFin", fechaFin));
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        documentosData = dataTable;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK);
+            }
+
+            return documentosData;
+        }
+
+        public DataTable GetProductoMasVendido()
+        {
+            DataTable productoData = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("GetProductoMasVendido", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        productoData = dataTable;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK);
+            }
+
+            return productoData;
+        }
+
+        public DataTable GetTop5ClientesQueMasCompran()
+        {
+            DataTable clientesData = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("GetTop5ClientesQueMasCompran", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        clientesData = dataTable;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK);
+            }
+
+            return clientesData;
+        }
     }
 }

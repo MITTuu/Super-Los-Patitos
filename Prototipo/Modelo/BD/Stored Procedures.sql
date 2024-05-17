@@ -1,8 +1,7 @@
--- Aqu� se van a colocar todos los stored procedures que vayan a ocupar en el codigo
--- Pueden ejecutar los querys desde el propio Visual Studio ;)
 USE SuperPatitosDB;
 
--- Obtener datos de un personal por correo y contrase�a
+-- Stored Procedure Personal
+-- Obtener datos de un personal por correo y contrasena
 CREATE PROCEDURE GetPersonalByEmailPassword
     @Correo VARCHAR(100),
     @Contrasena VARCHAR(100)
@@ -83,6 +82,7 @@ BEGIN
     VALUES (@Nombre, @PrimerApellido, @SegundoApellido, @Correo, @Telefono, @Identificacion, @idTipoIdentificacion);
 END;
 
+-- Stored Procedure Productos
 -- Insertar un nuevo producto en la BD
 CREATE PROCEDURE InsertProducto
     @Nombre VARCHAR(100),
@@ -172,8 +172,6 @@ BEGIN
     WHERE a.idAjuste = @idAjuste
 END
 
-
--- Stored Procedures Productos
 -- Obtener los datos de los productos 
 CREATE PROCEDURE GetProductos
 AS
@@ -368,4 +366,78 @@ BEGIN
 
     EXEC ActualizarEstadoDocumento @idDocumento = @idDocumento;
 END;
+
+-- Stored Procedure Informes
+-- Mostrar Facuras activas en el rango de fecha dado
+CREATE PROCEDURE GetDocumentosFI
+    @FechaInicio DATE,
+    @FechaFin DATE
+AS
+BEGIN
+    SELECT
+        d.idDocumento,
+        td.TipoDocumento AS TipoDocumento,
+        d.FechaCreacion,
+        d.Consecutivo,
+        d.idCliente,
+        CONCAT(p.Nombre, ' ', p.PrimerApellido) AS NombrePersonal,
+        CONCAT(c.Nombre, ' ', c.PrimerApellido) AS NombreCliente,
+        d.TotalImpuestos,
+        d.Subtotal,
+        d.Total,
+        d.Estado
+    FROM
+        Documentos d
+    JOIN
+        TiposDocumento td ON d.idTipoDocumento = td.idTipoDocumento
+    JOIN
+        Personal p ON d.idPersonal = p.idPersonal
+    LEFT JOIN
+        Clientes c ON d.idCliente = c.idCliente
+    WHERE
+        d.idTipoDocumento = 1  -- Factura
+        AND d.Estado = 1       -- Activo
+        AND d.FechaCreacion BETWEEN @FechaInicio AND @FechaFin;
+END;
+
+-- Obtener el producto mas vendido
+CREATE PROCEDURE GetProductoMasVendido
+AS
+BEGIN
+    SELECT TOP 1
+        p.Nombre AS Producto,
+        p.Codigo AS CodigoProducto,
+        SUM(l.Cantidad) AS TotalVendido
+    FROM
+        Lineas l
+    INNER JOIN
+        Productos p ON l.idProducto = p.idProducto
+    GROUP BY
+        p.Nombre, p.Codigo
+    ORDER BY
+        SUM(l.Cantidad) DESC;
+END;
+
+-- Top 5 clientes que mas compran
+CREATE PROCEDURE GetTop5ClientesQueMasCompran
+AS
+BEGIN
+    SELECT TOP 5
+        c.Identificacion AS Identificacion,
+        CONCAT(c.Nombre, ' ', c.PrimerApellido, ' ', ISNULL(c.SegundoApellido, '')) AS NombreCompleto,
+        COUNT(d.idDocumento) AS CantidadDocumentos
+    FROM
+        Clientes c
+    LEFT JOIN
+        Documentos d ON c.idCliente = d.idCliente
+    WHERE
+        d.idTipoDocumento IN (1, 2) -- Factura o Tiquete
+        AND d.Estado = 1 -- Estado activo
+    GROUP BY
+        c.Identificacion, c.Nombre, c.PrimerApellido, c.SegundoApellido
+    ORDER BY
+        COUNT(d.idDocumento) DESC;
+END;
+
+
 
