@@ -858,10 +858,7 @@ namespace Prototipo.Modelo
                     DataTable dataTable = new DataTable();
                     adapter.Fill(dataTable);
 
-                    if (dataTable.Rows.Count > 0)
-                    {
-                        dt = dataTable;
-                    }
+                    dt = dataTable;
                 }
             }
             catch (Exception ex)
