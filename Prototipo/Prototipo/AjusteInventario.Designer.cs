@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.pnRegistro = new System.Windows.Forms.Panel();
+            this.nudCantidadAjuste = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.tbBusqueda = new System.Windows.Forms.TextBox();
             this.dgvProductos = new System.Windows.Forms.DataGridView();
@@ -45,14 +46,20 @@
             this.dgvProductosAjuste = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.nudCantidadAjuste = new System.Windows.Forms.NumericUpDown();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.dgvAjustes = new System.Windows.Forms.DataGridView();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
             this.pnRegistro.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCantidadAjuste)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).BeginInit();
             this.pnTitulo.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductosAjuste)).BeginInit();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCantidadAjuste)).BeginInit();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAjustes)).BeginInit();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnRegistro
@@ -68,14 +75,31 @@
             this.pnRegistro.Location = new System.Drawing.Point(50, 32);
             this.pnRegistro.Margin = new System.Windows.Forms.Padding(2);
             this.pnRegistro.Name = "pnRegistro";
-            this.pnRegistro.Size = new System.Drawing.Size(500, 575);
+            this.pnRegistro.Size = new System.Drawing.Size(500, 314);
             this.pnRegistro.TabIndex = 7;
+            // 
+            // nudCantidadAjuste
+            // 
+            this.nudCantidadAjuste.Location = new System.Drawing.Point(202, 259);
+            this.nudCantidadAjuste.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+            this.nudCantidadAjuste.Minimum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            -2147483648});
+            this.nudCantidadAjuste.Name = "nudCantidadAjuste";
+            this.nudCantidadAjuste.Size = new System.Drawing.Size(120, 20);
+            this.nudCantidadAjuste.TabIndex = 16;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(32, 518);
+            this.label4.Location = new System.Drawing.Point(32, 258);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(156, 18);
@@ -104,7 +128,7 @@
             this.dgvProductos.ReadOnly = true;
             this.dgvProductos.RowHeadersVisible = false;
             this.dgvProductos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProductos.Size = new System.Drawing.Size(427, 382);
+            this.dgvProductos.Size = new System.Drawing.Size(427, 123);
             this.dgvProductos.TabIndex = 11;
             // 
             // pnTitulo
@@ -147,7 +171,7 @@
             // 
             this.btnAgregar.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btnAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregar.Location = new System.Drawing.Point(341, 508);
+            this.btnAgregar.Location = new System.Drawing.Point(341, 248);
             this.btnAgregar.Margin = new System.Windows.Forms.Padding(2);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(121, 37);
@@ -268,28 +292,63 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Registrar Ajuste de Inventario";
             // 
-            // nudCantidadAjuste
+            // panel3
             // 
-            this.nudCantidadAjuste.Location = new System.Drawing.Point(202, 519);
-            this.nudCantidadAjuste.Maximum = new decimal(new int[] {
-            99999,
-            0,
-            0,
-            0});
-            this.nudCantidadAjuste.Minimum = new decimal(new int[] {
-            99999,
-            0,
-            0,
-            -2147483648});
-            this.nudCantidadAjuste.Name = "nudCantidadAjuste";
-            this.nudCantidadAjuste.Size = new System.Drawing.Size(120, 20);
-            this.nudCantidadAjuste.TabIndex = 16;
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.dgvAjustes);
+            this.panel3.Controls.Add(this.panel4);
+            this.panel3.Location = new System.Drawing.Point(49, 366);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(500, 241);
+            this.panel3.TabIndex = 17;
+            // 
+            // dgvAjustes
+            // 
+            this.dgvAjustes.AllowUserToAddRows = false;
+            this.dgvAjustes.AllowUserToDeleteRows = false;
+            this.dgvAjustes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAjustes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAjustes.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dgvAjustes.Location = new System.Drawing.Point(35, 50);
+            this.dgvAjustes.MultiSelect = false;
+            this.dgvAjustes.Name = "dgvAjustes";
+            this.dgvAjustes.ReadOnly = true;
+            this.dgvAjustes.RowHeadersVisible = false;
+            this.dgvAjustes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvAjustes.Size = new System.Drawing.Size(427, 161);
+            this.dgvAjustes.TabIndex = 11;
+            this.dgvAjustes.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvAjustes_CellMouseDoubleClick);
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.SystemColors.Highlight;
+            this.panel4.Controls.Add(this.label6);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Margin = new System.Windows.Forms.Padding(2);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(498, 26);
+            this.panel4.TabIndex = 3;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label6.Location = new System.Drawing.Point(2, 0);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(145, 20);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Historial de Ajustes";
             // 
             // AjusteInventario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1163, 650);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pnRegistro);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -297,6 +356,7 @@
             this.Text = "Ajuste de Inventario";
             this.pnRegistro.ResumeLayout(false);
             this.pnRegistro.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCantidadAjuste)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
             this.pnTitulo.ResumeLayout(false);
             this.pnTitulo.PerformLayout();
@@ -305,7 +365,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductosAjuste)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCantidadAjuste)).EndInit();
+            this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAjustes)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -330,5 +393,9 @@
         private System.Windows.Forms.Button btnGaurdarAjuste;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown nudCantidadAjuste;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.DataGridView dgvAjustes;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label label6;
     }
 }

@@ -1,8 +1,8 @@
--- Aquí se van a colocar todos los stored procedures que vayan a ocupar en el codigo
+-- Aquï¿½ se van a colocar todos los stored procedures que vayan a ocupar en el codigo
 -- Pueden ejecutar los querys desde el propio Visual Studio ;)
 USE SuperPatitosDB;
 
--- Obtener datos de un personal por correo y contraseña
+-- Obtener datos de un personal por correo y contraseï¿½a
 CREATE PROCEDURE GetPersonalByEmailPassword
     @Correo VARCHAR(100),
     @Contrasena VARCHAR(100)
@@ -47,7 +47,7 @@ BEGIN
 END;
 
 -- Stored procedures Clientes
--- Obtener los datos de un cliente por su identificación
+-- Obtener los datos de un cliente por su identificaciï¿½n
 CREATE PROCEDURE GetClienteByIdentificacion
     @identificacion VARCHAR(50)
 AS
@@ -138,6 +138,40 @@ BEGIN
         SET Cantidad = (Cantidad + @CantidadAjustada)
         WHERE idProducto = @idProducto;
 END;
+END
+
+-- Seleccionar informaciï¿½n basica/general de todos los ajustes
+CREATE PROCEDURE SelectAjustes
+AS
+BEGIN
+    SELECT idAjuste AS [ID], a.FechaAjuste AS [Fecha], a.Razon, CONCAT_WS(' ', p.Nombre, p.PrimerApellido) AS [Responsable]
+    FROM Ajustes AS a
+    LEFT JOIN Personal AS p ON a.idPersonal = p.idPersonal
+    ORDER BY FechaAjuste DESC
+END
+
+-- Selecciona la info de 1 por medio de su ID
+CREATE PROCEDURE SelectAjusteById
+    @idAjuste INT
+AS
+BEGIN
+    SELECT a.FechaAjuste AS [Fecha], a.Razon, CONCAT_WS(' ', p.Nombre, p.PrimerApellido) AS [Responsable]
+    FROM Ajustes AS a
+    LEFT JOIN Personal AS p ON a.idPersonal = p.idPersonal 
+    WHERE a.idAjuste = @idAjuste
+END
+
+-- Seleccionar ajustes de productos individuales asociados a un ajuste
+CREATE PROCEDURE SelectAjustesProdutos
+    @idAjuste INT
+AS
+BEGIN
+    SELECT p.Nombre AS [Producto], a.CantidadAjustada AS [Cantidad Ajustada]
+    FROM AjustesProducto AS a
+    LEFT JOIN Productos AS p ON a.idProducto = p.idProducto
+    WHERE a.idAjuste = @idAjuste
+END
+
 
 -- Stored Procedures Productos
 -- Obtener los datos de los productos 
@@ -206,14 +240,14 @@ BEGIN
 END;
 
 -- Stored procedures Facturacion
--- Obtener el siguiente consecutivo según el idTipoDocumento
+-- Obtener el siguiente consecutivo segï¿½n el idTipoDocumento
 CREATE PROCEDURE GetSiguienteConsecutivo
     @idTipoDocumento INT
 AS
 BEGIN
     DECLARE @SiguienteConsecutivo INT;
 
-    -- Obtener el máximo valor de Consecutivo para el idTipoDocumento dado
+    -- Obtener el mï¿½ximo valor de Consecutivo para el idTipoDocumento dado
     SELECT @SiguienteConsecutivo = ISNULL(MAX(Consecutivo), 0) + 1
     FROM Documentos
     WHERE idTipoDocumento = @idTipoDocumento;
@@ -226,7 +260,7 @@ END;
 CREATE PROCEDURE GetIdDoc
 AS
 BEGIN
-    -- Obtener el máximo idDocumento
+    -- Obtener el mï¿½ximo idDocumento
 	SELECT MAX(idDocumento)
 	FROM Documentos
 END;
@@ -242,7 +276,7 @@ CREATE PROCEDURE InsertLinea
     @Total DECIMAL(10,2)
 AS
 BEGIN
-    -- Insertar la nueva línea en la tabla Lineas
+    -- Insertar la nueva lï¿½nea en la tabla Lineas
     INSERT INTO Lineas (idDocumento, Cantidad, idProducto, Subtotal, Impuesto, Total, Estado)
     VALUES (@idDocumento, @Cantidad, @idProducto, @Subtotal, @Impuesto, @Total, 1);
 END;
@@ -289,7 +323,7 @@ BEGIN
 		Clientes c ON d.idCliente = c.idCliente;
 END;
 
--- Stored Procedures para aplicar notas de crédito
+-- Stored Procedures para aplicar notas de crï¿½dito
 -- Acturalizar la cantidad de un producto
 CREATE PROCEDURE SumaCantidadProducto
     @idProducto INT,

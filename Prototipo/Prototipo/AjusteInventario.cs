@@ -16,6 +16,7 @@ namespace Prototipo.Prototipo
     {
         Cnx conexion;
         DataTable tablaProductos;
+        DataTable tablaProductosAjuste;
         DataTable tablaAjustes;
         int idPersonal;
 
@@ -24,12 +25,13 @@ namespace Prototipo.Prototipo
             InitializeComponent();
             conexion = new Cnx();
             BuscarProducto();
-            tablaAjustes = new DataTable();
-            tablaAjustes.Columns.Add("ID");
-            tablaAjustes.Columns["ID"].Unique = true;
-            tablaAjustes.Columns.Add("Producto");
-            tablaAjustes.Columns.Add("Ajuste");
-            dgvProductosAjuste.DataSource = tablaAjustes;
+            CargarHistorialAjustes();
+            tablaProductosAjuste = new DataTable();
+            tablaProductosAjuste.Columns.Add("ID");
+            tablaProductosAjuste.Columns["ID"].Unique = true;
+            tablaProductosAjuste.Columns.Add("Producto");
+            tablaProductosAjuste.Columns.Add("Ajuste");
+            dgvProductosAjuste.DataSource = tablaProductosAjuste;
             this.idPersonal = idPersonal;
         }
 
@@ -39,6 +41,12 @@ namespace Prototipo.Prototipo
             tablaProductos = conexion.GetProductoBySearch(busqueda);
             tablaProductos.Columns.Remove("Precio");
             dgvProductos.DataSource = tablaProductos.DefaultView;
+        }
+
+        private void CargarHistorialAjustes()
+        {
+            tablaAjustes = conexion.GetAjustes();
+            dgvAjustes.DataSource = tablaAjustes;
         }
 
         // ------------------------------------------------------------------------
@@ -79,8 +87,8 @@ namespace Prototipo.Prototipo
 
             try // para validar existencia del producto en la tabla de ajustes
             {
-                tablaAjustes.Rows.Add(idProducto, nombreProducto, cantidadAjuste);
-                dgvProductosAjuste.DataSource = tablaAjustes;
+                tablaProductosAjuste.Rows.Add(idProducto, nombreProducto, cantidadAjuste);
+                dgvProductosAjuste.DataSource = tablaProductosAjuste;
                 nudCantidadAjuste.Value = 0;
             }
             catch (Exception ex)
@@ -101,17 +109,20 @@ namespace Prototipo.Prototipo
             {
                 return;
             }
-            for (int i = 0; i < tablaAjustes.Rows.Count; i++)
+            for (int i = 0; i < tablaProductosAjuste.Rows.Count; i++)
             {
-                int.TryParse(tablaAjustes.Rows[i]["ID"].ToString(), out int idProducto);
-                int.TryParse(tablaAjustes.Rows[i]["Ajuste"].ToString(), out int cantidadAjuste);
+                int.TryParse(tablaProductosAjuste.Rows[i]["ID"].ToString(), out int idProducto);
+                int.TryParse(tablaProductosAjuste.Rows[i]["Ajuste"].ToString(), out int cantidadAjuste);
 
                 conexion.InsertAjusteProducto(idProducto, cantidadAjuste, idAjuste);
             }
+
+            //  Finalizado
             MessageBox.Show("Ajuste de inventario agregado con exito");
-            tablaAjustes.Rows.Clear();
-            dgvProductosAjuste.DataSource = tablaAjustes.DefaultView;
+            tablaProductosAjuste.Rows.Clear();
+            dgvProductosAjuste.DataSource = tablaProductosAjuste.DefaultView;
             BuscarProducto();
+            CargarHistorialAjustes();
         }
 
         private void btEliminarAjuste_Click(object sender, EventArgs e)
@@ -119,9 +130,16 @@ namespace Prototipo.Prototipo
             if (dgvProductosAjuste.SelectedRows.Count == 1)
             {
                 int index = dgvProductosAjuste.SelectedRows[0].Index;
-                tablaAjustes.Rows.RemoveAt(index);
-                dgvProductosAjuste.DataSource = tablaAjustes.DefaultView;
+                tablaProductosAjuste.Rows.RemoveAt(index);
+                dgvProductosAjuste.DataSource = tablaProductosAjuste.DefaultView;
             }
+        }
+
+        private void dgvAjustes_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            int idAjuste = (int) dgvAjustes.SelectedRows[0].Cells["ID"].Value;
+            DetalleAjuste detalleAjusteWindow = new DetalleAjuste(idAjuste);
+            detalleAjusteWindow.ShowDialog();
         }
     }
 }
