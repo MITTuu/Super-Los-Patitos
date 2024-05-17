@@ -345,6 +345,31 @@ namespace Prototipo.Modelo
             }
         }
 
+        public bool InsertNotasCreditoDocumentos(int idNotaCredito, int idDocumentoRelacionado)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("InsertNotasCreditoDocumentos", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@idNotaCredito", idNotaCredito);
+                    command.Parameters.AddWithValue("@idDocumentoRelacionado", idDocumentoRelacionado);
+
+                    command.ExecuteNonQuery();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK);
+                return false;
+            }
+        }
+
         public int GetIdDocumento()
         {
             try
