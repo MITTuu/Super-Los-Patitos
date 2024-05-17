@@ -30,6 +30,7 @@
         {
             this.pnOpciones = new System.Windows.Forms.Panel();
             this.pnInformes = new System.Windows.Forms.Panel();
+            this.btnGraficos = new System.Windows.Forms.Button();
             this.btnReporteFac = new System.Windows.Forms.Button();
             this.lbInformes = new System.Windows.Forms.Label();
             this.pnGestionInventario = new System.Windows.Forms.Panel();
@@ -78,6 +79,7 @@
             // 
             // pnInformes
             // 
+            this.pnInformes.Controls.Add(this.btnGraficos);
             this.pnInformes.Controls.Add(this.btnReporteFac);
             this.pnInformes.Controls.Add(this.lbInformes);
             this.pnInformes.Dock = System.Windows.Forms.DockStyle.Top;
@@ -86,6 +88,19 @@
             this.pnInformes.Name = "pnInformes";
             this.pnInformes.Size = new System.Drawing.Size(329, 170);
             this.pnInformes.TabIndex = 3;
+            // 
+            // btnGraficos
+            // 
+            this.btnGraficos.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnGraficos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGraficos.Location = new System.Drawing.Point(4, 96);
+            this.btnGraficos.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnGraficos.Name = "btnGraficos";
+            this.btnGraficos.Size = new System.Drawing.Size(323, 50);
+            this.btnGraficos.TabIndex = 6;
+            this.btnGraficos.Text = "Gráficos";
+            this.btnGraficos.UseVisualStyleBackColor = false;
+            this.btnGraficos.Click += new System.EventHandler(this.btnGraficos_Click);
             // 
             // btnReporteFac
             // 
@@ -96,7 +111,7 @@
             this.btnReporteFac.Name = "btnReporteFac";
             this.btnReporteFac.Size = new System.Drawing.Size(323, 50);
             this.btnReporteFac.TabIndex = 5;
-            this.btnReporteFac.Text = "Reporte Facturas";
+            this.btnReporteFac.Text = "Reportería";
             this.btnReporteFac.UseVisualStyleBackColor = false;
             this.btnReporteFac.Click += new System.EventHandler(this.btnReporteFac_Click);
             // 
@@ -175,7 +190,7 @@
             this.btnNC.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.btnNC.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNC.Location = new System.Drawing.Point(4, 106);
-            this.btnNC.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnNC.Margin = new System.Windows.Forms.Padding(4);
             this.btnNC.Name = "btnNC";
             this.btnNC.Size = new System.Drawing.Size(323, 46);
             this.btnNC.TabIndex = 3;
@@ -397,5 +412,6 @@
         private System.Windows.Forms.Button btnReporteFac;
         private System.Windows.Forms.Button btAjusteInventario;
         private System.Windows.Forms.Button btnNC;
+        private System.Windows.Forms.Button btnGraficos;
     }
 }

@@ -124,6 +124,11 @@ namespace Prototipo.Prototipo
             abrir_Ventana(new NotasDeCredito(personalData));
         }
 
+        private void btnGraficos_Click(object sender, EventArgs e)
+        {
+            abrir_Ventana(new Graficos());
+        }
+
         //Abrir otro form pero en un form 
         private void abrir_Ventana(object nuevaVentana)
         {
