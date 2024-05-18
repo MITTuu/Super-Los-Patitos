@@ -386,6 +386,15 @@ BEGIN
     EXEC ActualizarEstadoDocumento @idDocumento = @idDocumento;
 END;
 
+CREATE PROCEDURE InsertNotasCreditoDocumentos
+    @idNotaCredito INT,
+    @idDocumentoRelacionado INT
+AS
+BEGIN
+    INSERT INTO NotasCreditoDocumentos (idNotaCredito, idDocumentoRelacionado)
+    VALUES (@idNotaCredito, @idDocumentoRelacionado);
+END;
+
 -- Stored Procedure Informes
 -- Mostrar Facuras activas en el rango de fecha dado
 CREATE PROCEDURE GetDocumentosFI
