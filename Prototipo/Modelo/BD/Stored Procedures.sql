@@ -116,7 +116,7 @@ BEGIN
 END;
 
 -- Seleccionar los productos que tengan coincidencias con la busqueda
-CREATE PROCEDURE SelectProductoCoincidencia
+ALTER PROCEDURE SelectProductoCoincidencia
     @busqueda VARCHAR(100)
 AS
 BEGIN

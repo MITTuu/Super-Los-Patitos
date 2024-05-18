@@ -669,7 +669,7 @@ namespace Prototipo.Prototipo
 
                 string From = "dylanmmz01@gmail.com";
                 string To = clienteData["Correo"].ToString();
-                string Message = "Saludos querido cliente, le adjuntamos la factura elétronica. Gracias por su compra.";
+                string Message = "Saludos querido cliente, le adjuntamos la factura eletrónica. Gracias por su compra.";
                 string Subject = "Factura Eléctronica";
                 List<string> lstArchivos = new List<string>();
                 lstArchivos.Add(rutaArchivoPDF);
