@@ -386,6 +386,15 @@ BEGIN
     EXEC ActualizarEstadoDocumento @idDocumento = @idDocumento;
 END;
 
+CREATE PROCEDURE InsertNotasCreditoDocumentos
+    @idNotaCredito INT,
+    @idDocumentoRelacionado INT
+AS
+BEGIN
+    INSERT INTO NotasCreditoDocumentos (idNotaCredito, idDocumentoRelacionado)
+    VALUES (@idNotaCredito, @idDocumentoRelacionado);
+END;
+
 -- Stored Procedure Informes
 -- Mostrar Facuras activas en el rango de fecha dado
 CREATE PROCEDURE GetDocumentosFI
@@ -486,4 +495,116 @@ AS
 BEGIN
     INSERT INTO NotasCreditoDocumentos (idNotaCredito, idDocumentoRelacionado)
     VALUES (@idNotaCredito, @idDocumentoRelacionado);
+END;
+END
+
+-- Insertar un personal
+CREATE PROCEDURE InsertPersonal
+    @Nombre VARCHAR(50),
+    @PrimerApellido VARCHAR(50),
+    @SegundoApellido VARCHAR(50),
+    @Correo VARCHAR(100),
+	@Contrasena VARCHAR(100),
+    @Telefono VARCHAR(20),
+	@Estado VARCHAR(10),
+	@Identificacion VARCHAR(50),
+    @idTipoIdentificacion INT,
+	@idRol INT
+AS
+BEGIN
+    -- Insertar el nuevo cliente en la tabla Personal
+    INSERT INTO Personal(Nombre, PrimerApellido, SegundoApellido, Correo, Contrasena, Telefono, Identificacion, idTipoIdentificacion, idRol, Estado)
+    VALUES (@Nombre, @PrimerApellido, @SegundoApellido, @Correo, @Contrasena, @Telefono, @Identificacion, @idTipoIdentificacion, @idRol, @Estado);
+END;
+
+CREATE PROCEDURE UpdatePersonal
+    @idPersonal INT,
+    @Nombre VARCHAR(50),
+    @PrimerApellido VARCHAR(50),
+    @SegundoApellido VARCHAR(50),
+    @Correo VARCHAR(100),
+    @Contrasena VARCHAR(100),
+    @Telefono VARCHAR(20),
+    @Estado BIT,
+    @Identificacion VARCHAR(50),
+    @idTipoIdentificacion INT,
+    @idRol INT
+AS
+BEGIN
+    UPDATE Personal
+    SET Nombre = @Nombre,
+        PrimerApellido = @PrimerApellido,
+        SegundoApellido = @SegundoApellido,
+        Correo = @Correo,
+        Contrasena = @Contrasena,
+        Telefono = @Telefono,
+        Estado = @Estado,
+        Identificacion = @Identificacion,
+        idTipoIdentificacion = @idTipoIdentificacion,
+        idRol = @idRol
+    WHERE idPersonal = @idPersonal;
+END
+
+CREATE PROCEDURE GetCedulaBuscar
+    @Identificacion VARCHAR(50)
+AS
+BEGIN
+    SELECT 
+        idPersonal,
+        Nombre,
+        PrimerApellido,
+        SegundoApellido,
+        Correo,
+        Contrasena,
+        Telefono,
+        Estado,
+        Identificacion,
+        idTipoIdentificacion,
+        idRol
+    FROM 
+        Personal
+    WHERE 
+        Identificacion LIKE CONCAT('%',@Identificacion,'%');
+END;
+
+
+CREATE PROCEDURE GetNombreBuscar
+    @Nombre VARCHAR(50)
+AS
+BEGIN
+    SELECT 
+        idPersonal,
+        Nombre,
+        PrimerApellido,
+        SegundoApellido,
+        Correo,
+        Contrasena,
+        Telefono,
+        Estado,
+        Identificacion,
+        idTipoIdentificacion,
+        idRol
+    FROM 
+        Personal
+    WHERE 
+        CONCAT_WS (' ', Nombre, PrimerApellido, SegundoApellido) LIKE CONCAT('%',@Nombre,'%') ;
+END;
+
+CREATE PROCEDURE DataPersonal
+AS
+BEGIN
+    SELECT 
+        idPersonal,
+        Nombre,
+        PrimerApellido,
+        SegundoApellido,
+        Correo,
+        Contrasena,
+        Telefono,
+        Estado,
+        Identificacion,
+        idTipoIdentificacion,
+        idRol
+    FROM 
+        Personal
 END;

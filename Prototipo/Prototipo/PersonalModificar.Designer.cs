@@ -7,6 +7,7 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -28,36 +29,41 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbBusqueda = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbBusqueda = new System.Windows.Forms.ComboBox();
             this.btnBuscar = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.cbRol = new System.Windows.Forms.ComboBox();
-            this.cbTipoI = new System.Windows.Forms.ComboBox();
-            this.btnModificar = new System.Windows.Forms.Button();
-            this.tbTelefono = new System.Windows.Forms.TextBox();
-            this.tbContrasenia = new System.Windows.Forms.TextBox();
+            this.lbEstado = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cbEstado = new System.Windows.Forms.ComboBox();
             this.lbTipoI = new System.Windows.Forms.Label();
             this.lbTelefono = new System.Windows.Forms.Label();
             this.lbRol = new System.Windows.Forms.Label();
             this.lbContrasenia = new System.Windows.Forms.Label();
-            this.tbCorreo = new System.Windows.Forms.TextBox();
             this.lbCorreo = new System.Windows.Forms.Label();
-            this.tbIdentificación = new System.Windows.Forms.TextBox();
             this.lbIdentificacion = new System.Windows.Forms.Label();
-            this.tbApellido2 = new System.Windows.Forms.TextBox();
             this.lbApellido2 = new System.Windows.Forms.Label();
-            this.tbApellido1 = new System.Windows.Forms.TextBox();
+            this.btnModificar = new System.Windows.Forms.Button();
+            this.cbTipoI = new System.Windows.Forms.ComboBox();
             this.lbApellido1 = new System.Windows.Forms.Label();
+            this.tbApellido2 = new System.Windows.Forms.TextBox();
+            this.tbApellido1 = new System.Windows.Forms.TextBox();
             this.tbNombre = new System.Windows.Forms.TextBox();
             this.lbNombre = new System.Windows.Forms.Label();
+            this.tbTelefono = new System.Windows.Forms.TextBox();
+            this.tbContrasenia = new System.Windows.Forms.TextBox();
+            this.tbCorreo = new System.Windows.Forms.TextBox();
+            this.tbIdentificación = new System.Windows.Forms.TextBox();
+            this.cbRol = new System.Windows.Forms.ComboBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.panel3.SuspendLayout();
+            this.cnxBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dgvPersonal = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cnxBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPersonal)).BeginInit();
             this.SuspendLayout();
             // 
             // panel2
@@ -67,13 +73,14 @@
             this.panel2.Size = new System.Drawing.Size(51, 11);
             this.panel2.TabIndex = 24;
             // 
-            // textBox1
+            // tbBusqueda
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(96, 38);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(332, 30);
-            this.textBox1.TabIndex = 24;
+            this.tbBusqueda.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbBusqueda.Location = new System.Drawing.Point(96, 38);
+            this.tbBusqueda.Name = "tbBusqueda";
+            this.tbBusqueda.Size = new System.Drawing.Size(332, 30);
+            this.tbBusqueda.TabIndex = 24;
+            this.tbBusqueda.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
             // 
@@ -85,19 +92,19 @@
             this.label1.TabIndex = 24;
             this.label1.Text = "Buscar por:";
             // 
-            // comboBox1
+            // cbBusqueda
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "",
+            this.cbBusqueda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbBusqueda.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbBusqueda.FormattingEnabled = true;
+            this.cbBusqueda.Items.AddRange(new object[] {
             "Nombre Completo",
             "Identificación"});
-            this.comboBox1.Location = new System.Drawing.Point(608, 38);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(223, 33);
-            this.comboBox1.TabIndex = 24;
+            this.cbBusqueda.Location = new System.Drawing.Point(608, 38);
+            this.cbBusqueda.Name = "cbBusqueda";
+            this.cbBusqueda.Size = new System.Drawing.Size(223, 33);
+            this.cbBusqueda.TabIndex = 24;
+            this.cbBusqueda.SelectedIndexChanged += new System.EventHandler(this.cbBusqueda_SelectedIndexChanged);
             // 
             // btnBuscar
             // 
@@ -111,110 +118,65 @@
             this.btnBuscar.UseVisualStyleBackColor = false;
             this.btnBuscar.Click += new System.EventHandler(this.button1_Click);
             // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.panel3.Controls.Add(this.label2);
-            this.panel3.Location = new System.Drawing.Point(96, 107);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1508, 196);
-            this.panel3.TabIndex = 26;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(27, 25);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(462, 75);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Hacer un DataGridView para previsualizar los datos\r\nlas coincidencias con lo ingr" +
-    "esado, y asi seleccionar\r\nuno para cargar su información.";
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.panel1.Controls.Add(this.cbRol);
-            this.panel1.Controls.Add(this.cbTipoI);
-            this.panel1.Controls.Add(this.btnModificar);
-            this.panel1.Controls.Add(this.tbTelefono);
-            this.panel1.Controls.Add(this.tbContrasenia);
+            this.panel1.Controls.Add(this.lbEstado);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.cbEstado);
             this.panel1.Controls.Add(this.lbTipoI);
             this.panel1.Controls.Add(this.lbTelefono);
             this.panel1.Controls.Add(this.lbRol);
             this.panel1.Controls.Add(this.lbContrasenia);
-            this.panel1.Controls.Add(this.tbCorreo);
             this.panel1.Controls.Add(this.lbCorreo);
-            this.panel1.Controls.Add(this.tbIdentificación);
             this.panel1.Controls.Add(this.lbIdentificacion);
-            this.panel1.Controls.Add(this.tbApellido2);
             this.panel1.Controls.Add(this.lbApellido2);
-            this.panel1.Controls.Add(this.tbApellido1);
+            this.panel1.Controls.Add(this.btnModificar);
+            this.panel1.Controls.Add(this.cbTipoI);
             this.panel1.Controls.Add(this.lbApellido1);
+            this.panel1.Controls.Add(this.tbApellido2);
+            this.panel1.Controls.Add(this.tbApellido1);
             this.panel1.Controls.Add(this.tbNombre);
             this.panel1.Controls.Add(this.lbNombre);
-            this.panel1.Location = new System.Drawing.Point(96, 323);
+            this.panel1.Controls.Add(this.tbTelefono);
+            this.panel1.Controls.Add(this.tbContrasenia);
+            this.panel1.Controls.Add(this.tbCorreo);
+            this.panel1.Controls.Add(this.tbIdentificación);
+            this.panel1.Controls.Add(this.cbRol);
+            this.panel1.Location = new System.Drawing.Point(12, 327);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1508, 681);
+            this.panel1.Size = new System.Drawing.Size(1608, 679);
             this.panel1.TabIndex = 27;
             // 
-            // cbRol
+            // lbEstado
             // 
-            this.cbRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbRol.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbRol.FormattingEnabled = true;
-            this.cbRol.Items.AddRange(new object[] {
-            "",
-            "Administrador de Inventario",
-            "Cajero",
-            "Contador"});
-            this.cbRol.Location = new System.Drawing.Point(50, 552);
-            this.cbRol.Name = "cbRol";
-            this.cbRol.Size = new System.Drawing.Size(292, 33);
-            this.cbRol.TabIndex = 23;
+            this.lbEstado.AutoSize = true;
+            this.lbEstado.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbEstado.Location = new System.Drawing.Point(842, 231);
+            this.lbEstado.Name = "lbEstado";
+            this.lbEstado.Size = new System.Drawing.Size(73, 25);
+            this.lbEstado.TabIndex = 26;
+            this.lbEstado.Text = "Estado";
             // 
-            // cbTipoI
+            // label2
             // 
-            this.cbTipoI.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTipoI.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbTipoI.FormattingEnabled = true;
-            this.cbTipoI.Items.AddRange(new object[] {
-            "",
-            "Cédula Física",
-            "Cédula Jurídica",
-            "Cédula Dímex",
-            "Nite"});
-            this.cbTipoI.Location = new System.Drawing.Point(447, 259);
-            this.cbTipoI.Name = "cbTipoI";
-            this.cbTipoI.Size = new System.Drawing.Size(279, 33);
-            this.cbTipoI.TabIndex = 22;
+            this.label2.Location = new System.Drawing.Point(0, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(100, 23);
+            this.label2.TabIndex = 0;
             // 
-            // btnModificar
+            // cbEstado
             // 
-            this.btnModificar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnModificar.Location = new System.Drawing.Point(680, 610);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(137, 52);
-            this.btnModificar.TabIndex = 21;
-            this.btnModificar.Text = "Modificar";
-            this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click_1);
-            // 
-            // tbTelefono
-            // 
-            this.tbTelefono.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbTelefono.Location = new System.Drawing.Point(847, 401);
-            this.tbTelefono.Name = "tbTelefono";
-            this.tbTelefono.Size = new System.Drawing.Size(279, 30);
-            this.tbTelefono.TabIndex = 18;
-            // 
-            // tbContrasenia
-            // 
-            this.tbContrasenia.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbContrasenia.Location = new System.Drawing.Point(447, 401);
-            this.tbContrasenia.Name = "tbContrasenia";
-            this.tbContrasenia.Size = new System.Drawing.Size(279, 30);
-            this.tbContrasenia.TabIndex = 17;
+            this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEstado.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbEstado.FormattingEnabled = true;
+            this.cbEstado.Items.AddRange(new object[] {
+            "INACTIVO",
+            "ACTIVO"});
+            this.cbEstado.Location = new System.Drawing.Point(847, 268);
+            this.cbEstado.Name = "cbEstado";
+            this.cbEstado.Size = new System.Drawing.Size(279, 33);
+            this.cbEstado.TabIndex = 25;
             // 
             // lbTipoI
             // 
@@ -256,14 +218,6 @@
             this.lbContrasenia.TabIndex = 13;
             this.lbContrasenia.Text = "Contraseña";
             // 
-            // tbCorreo
-            // 
-            this.tbCorreo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbCorreo.Location = new System.Drawing.Point(47, 401);
-            this.tbCorreo.Name = "tbCorreo";
-            this.tbCorreo.Size = new System.Drawing.Size(279, 30);
-            this.tbCorreo.TabIndex = 12;
-            // 
             // lbCorreo
             // 
             this.lbCorreo.AutoSize = true;
@@ -273,14 +227,6 @@
             this.lbCorreo.Size = new System.Drawing.Size(72, 25);
             this.lbCorreo.TabIndex = 11;
             this.lbCorreo.Text = "Correo";
-            // 
-            // tbIdentificación
-            // 
-            this.tbIdentificación.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbIdentificación.Location = new System.Drawing.Point(47, 259);
-            this.tbIdentificación.Name = "tbIdentificación";
-            this.tbIdentificación.Size = new System.Drawing.Size(279, 30);
-            this.tbIdentificación.TabIndex = 10;
             // 
             // lbIdentificacion
             // 
@@ -292,14 +238,6 @@
             this.lbIdentificacion.TabIndex = 9;
             this.lbIdentificacion.Text = "Identificación";
             // 
-            // tbApellido2
-            // 
-            this.tbApellido2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbApellido2.Location = new System.Drawing.Point(847, 117);
-            this.tbApellido2.Name = "tbApellido2";
-            this.tbApellido2.Size = new System.Drawing.Size(279, 30);
-            this.tbApellido2.TabIndex = 8;
-            // 
             // lbApellido2
             // 
             this.lbApellido2.AutoSize = true;
@@ -310,13 +248,32 @@
             this.lbApellido2.TabIndex = 7;
             this.lbApellido2.Text = "Segundo Apellido";
             // 
-            // tbApellido1
+            // btnModificar
             // 
-            this.tbApellido1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbApellido1.Location = new System.Drawing.Point(447, 117);
-            this.tbApellido1.Name = "tbApellido1";
-            this.tbApellido1.Size = new System.Drawing.Size(279, 30);
-            this.tbApellido1.TabIndex = 6;
+            this.btnModificar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModificar.Location = new System.Drawing.Point(762, 566);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(137, 52);
+            this.btnModificar.TabIndex = 21;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click_1);
+            // 
+            // cbTipoI
+            // 
+            this.cbTipoI.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTipoI.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbTipoI.FormattingEnabled = true;
+            this.cbTipoI.Items.AddRange(new object[] {
+            "",
+            "Cédula Física",
+            "Cédula Jurídica",
+            "Cédula Dímex",
+            "Nite"});
+            this.cbTipoI.Location = new System.Drawing.Point(447, 268);
+            this.cbTipoI.Name = "cbTipoI";
+            this.cbTipoI.Size = new System.Drawing.Size(279, 33);
+            this.cbTipoI.TabIndex = 22;
             // 
             // lbApellido1
             // 
@@ -328,10 +285,26 @@
             this.lbApellido1.TabIndex = 5;
             this.lbApellido1.Text = "Primer Apellido";
             // 
+            // tbApellido2
+            // 
+            this.tbApellido2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbApellido2.Location = new System.Drawing.Point(847, 127);
+            this.tbApellido2.Name = "tbApellido2";
+            this.tbApellido2.Size = new System.Drawing.Size(279, 30);
+            this.tbApellido2.TabIndex = 8;
+            // 
+            // tbApellido1
+            // 
+            this.tbApellido1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbApellido1.Location = new System.Drawing.Point(447, 127);
+            this.tbApellido1.Name = "tbApellido1";
+            this.tbApellido1.Size = new System.Drawing.Size(279, 30);
+            this.tbApellido1.TabIndex = 6;
+            // 
             // tbNombre
             // 
             this.tbNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbNombre.Location = new System.Drawing.Point(47, 117);
+            this.tbNombre.Location = new System.Drawing.Point(49, 117);
             this.tbNombre.Name = "tbNombre";
             this.tbNombre.Size = new System.Drawing.Size(279, 30);
             this.tbNombre.TabIndex = 2;
@@ -346,12 +319,74 @@
             this.lbNombre.TabIndex = 1;
             this.lbNombre.Text = "Nombre";
             // 
+            // tbTelefono
+            // 
+            this.tbTelefono.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbTelefono.Location = new System.Drawing.Point(837, 401);
+            this.tbTelefono.Name = "tbTelefono";
+            this.tbTelefono.Size = new System.Drawing.Size(279, 30);
+            this.tbTelefono.TabIndex = 18;
+            // 
+            // tbContrasenia
+            // 
+            this.tbContrasenia.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbContrasenia.Location = new System.Drawing.Point(447, 401);
+            this.tbContrasenia.Name = "tbContrasenia";
+            this.tbContrasenia.Size = new System.Drawing.Size(279, 30);
+            this.tbContrasenia.TabIndex = 17;
+            // 
+            // tbCorreo
+            // 
+            this.tbCorreo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbCorreo.Location = new System.Drawing.Point(49, 401);
+            this.tbCorreo.Name = "tbCorreo";
+            this.tbCorreo.Size = new System.Drawing.Size(279, 30);
+            this.tbCorreo.TabIndex = 12;
+            // 
+            // tbIdentificación
+            // 
+            this.tbIdentificación.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbIdentificación.Location = new System.Drawing.Point(49, 268);
+            this.tbIdentificación.Name = "tbIdentificación";
+            this.tbIdentificación.Size = new System.Drawing.Size(279, 30);
+            this.tbIdentificación.TabIndex = 10;
+            // 
+            // cbRol
+            // 
+            this.cbRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbRol.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbRol.FormattingEnabled = true;
+            this.cbRol.Items.AddRange(new object[] {
+            "",
+            "Administrador de Inventario",
+            "Cajero",
+            "Contador"});
+            this.cbRol.Location = new System.Drawing.Point(49, 552);
+            this.cbRol.Name = "cbRol";
+            this.cbRol.Size = new System.Drawing.Size(292, 33);
+            this.cbRol.TabIndex = 23;
+            // 
             // panel4
             // 
             this.panel4.Location = new System.Drawing.Point(741, 1012);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(200, 14);
             this.panel4.TabIndex = 24;
+            // 
+            // dgvPersonal
+            // 
+            this.dgvPersonal.AllowUserToDeleteRows = false;
+            this.dgvPersonal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPersonal.Location = new System.Drawing.Point(12, 86);
+            this.dgvPersonal.Name = "dgvPersonal";
+            this.dgvPersonal.ReadOnly = true;
+            this.dgvPersonal.RowHeadersWidth = 51;
+            this.dgvPersonal.RowTemplate.Height = 24;
+            this.dgvPersonal.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPersonal.Size = new System.Drawing.Size(1608, 231);
+            this.dgvPersonal.TabIndex = 28;
+            this.dgvPersonal.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPersonal_CellContentClick);
+            this.dgvPersonal.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvPersonal_CellMouseDoubleClick);
             // 
             // PersonalModificar
             // 
@@ -363,22 +398,22 @@
             this.ControlBox = false;
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel3);
             this.Controls.Add(this.btnBuscar);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cbBusqueda);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbBusqueda);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.dgvPersonal);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "PersonalModificar";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "PersonalModificar";
             this.Load += new System.EventHandler(this.PersonalModificar_Load);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cnxBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPersonal)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -386,12 +421,10 @@
 
         #endregion
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbBusqueda;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbBusqueda;
         private System.Windows.Forms.Button btnBuscar;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox cbRol;
         private System.Windows.Forms.ComboBox cbTipoI;
@@ -413,5 +446,10 @@
         private System.Windows.Forms.TextBox tbNombre;
         private System.Windows.Forms.Label lbNombre;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.BindingSource cnxBindingSource;
+        private System.Windows.Forms.DataGridView dgvPersonal;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cbEstado;
+        private System.Windows.Forms.Label lbEstado;
     }
 }
