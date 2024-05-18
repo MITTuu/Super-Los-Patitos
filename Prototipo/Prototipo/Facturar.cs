@@ -155,16 +155,6 @@ namespace Prototipo.Prototipo
         private void cbTipoDoc_SelectedValueChanged(object sender, EventArgs e)
         {
             actualizarConsecutivo();
-            if (cbTipoDoc.SelectedIndex == 1)
-            {
-                tbUsuario.Enabled = false;
-                btnBuscarCliente.Enabled = false;
-            }
-            else
-            {
-                tbUsuario.Enabled = true;
-                btnBuscarCliente.Enabled = true;
-            }
         }
 
         private void actualizarConsecutivo()

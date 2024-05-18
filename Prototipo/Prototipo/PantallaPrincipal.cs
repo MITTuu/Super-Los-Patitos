@@ -14,16 +14,16 @@ namespace Prototipo.Prototipo
     {
         int idRol;
         DataRow personalData;
-        bool sesion;
         Login l;
+        bool sesion;
 
         public PantallaPrincipal(Login l,int idRol, DataRow personalData)
         {
             InitializeComponent();
             this.idRol = idRol;
             this.personalData = personalData;
-            this.l = l;
             this.sesion = false;
+            this.l = l;
         }
 
         private void PantallaPrincipal_Load(object sender, EventArgs e)
@@ -31,12 +31,7 @@ namespace Prototipo.Prototipo
             lbBienvenido.Text = lbBienvenido.Text + $" {personalData["Nombre"]}!";
             if (idRol == 1)
             {
-                // Apilar los paneles 
-                // pnControlPersonal
-                // pnFacturacion
-                // pnGestionInventario
-                // pnInformes
-                // uno sobre otro
+                // abc
             }
             if (idRol == 2)
             {
@@ -63,20 +58,6 @@ namespace Prototipo.Prototipo
 
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
-
-        }
-
-        private void btnCS_Click(object sender, EventArgs e)
-        {
-            String mensaje = "¿Desea cerrar la sesión?";
-            DialogResult resultado = MessageBox.Show(mensaje, "Cerrar Sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (resultado == DialogResult.Yes)
-            {
-                l.Visible = true;
-                sesion = true;
-                this.Close();
-            }
 
         }
 
@@ -156,16 +137,32 @@ namespace Prototipo.Prototipo
 
         private void PantallaPrincipal_FormClosing(object sender, FormClosingEventArgs e)
         {
-            String mensaje = "¿Desea cerrar el programa?";
-            DialogResult resultado = MessageBox.Show(mensaje, "Salir", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (sesion == false)
+            {
+                String mensaje = "¿Desea cerrar el programa?";
+                DialogResult resultado = MessageBox.Show(mensaje, "Salir", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (resultado == DialogResult.Yes)
+                {
+                    l.Close();
+                }
+                else if (resultado == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void btnCS_Click(object sender, EventArgs e)
+        {
+            String mensaje = "¿Desea cerrar la sesión?";
+            DialogResult resultado = MessageBox.Show(mensaje, "Cerrar Sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (resultado == DialogResult.Yes)
             {
-                l.Close();
-            }
-            else if (resultado == DialogResult.No)
-            {
-                e.Cancel = true;
+                l.Visible = true;
+                sesion = true;
+                this.Close();
             }
         }
     }

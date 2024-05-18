@@ -478,3 +478,12 @@ BEGIN
     GROUP BY FechaCreacion
     ORDER BY FechaCreacion DESC
 END
+
+CREATE PROCEDURE InsertNotasCreditoDocumentos
+    @idNotaCredito INT,
+    @idDocumentoRelacionado INT
+AS
+BEGIN
+    INSERT INTO NotasCreditoDocumentos (idNotaCredito, idDocumentoRelacionado)
+    VALUES (@idNotaCredito, @idDocumentoRelacionado);
+END;
