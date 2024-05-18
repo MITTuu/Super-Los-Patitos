@@ -77,6 +77,9 @@ namespace Prototipo.Prototipo
             cbTipoMedida.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Buscar y carga las coincidencias de productos segun lo escrito en el textBox de busqueda
+        /// </summary>
         private void BuscarProducto()
         {
             string busqueda = tbBusqueda.Text;

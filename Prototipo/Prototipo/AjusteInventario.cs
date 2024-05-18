@@ -36,6 +36,9 @@ namespace Prototipo.Prototipo
             this.idPersonal = idPersonal;
         }
 
+        /// <summary>
+        /// Busca el producto basado en el texto que se encuentre en el textBox de busqueda
+        /// </summary>
         private void BuscarProducto()
         {
             string busqueda = tbBusqueda.Text;
@@ -45,6 +48,9 @@ namespace Prototipo.Prototipo
             dgvProductos.DataSource = tablaProductos.DefaultView;
         }
 
+        /// <summary>
+        /// Carga la informacion de los ajustes realizados en el DataGridView
+        /// </summary>
         private void CargarHistorialAjustes()
         {
             tablaAjustes = conexion.GetAjustes();
@@ -106,6 +112,11 @@ namespace Prototipo.Prototipo
             }
         }
 
+        /// <summary>
+        /// Valida y Guarda el ajuste en la BD
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnGaurdarAjuste_Click(object sender, EventArgs e)
         {
             // Validar exitencia de info
@@ -140,6 +151,11 @@ namespace Prototipo.Prototipo
             CargarHistorialAjustes();
         }
 
+        /// <summary>
+        /// Elimina un ajuste de producto de la lista de registrar ajuste
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btEliminarAjuste_Click(object sender, EventArgs e)
         {
             if (dgvProductosAjuste.SelectedRows.Count == 1)

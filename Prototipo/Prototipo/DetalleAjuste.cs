@@ -24,6 +24,9 @@ namespace Prototipo.Prototipo
             CargarInfo();
         }
 
+        /// <summary>
+        /// Carga en la GUI la info del ajuste seleccionado desde la BD
+        /// </summary>
         private void CargarInfo()
         {
             // traer info de BD

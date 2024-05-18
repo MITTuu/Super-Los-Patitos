@@ -35,6 +35,9 @@ namespace Prototipo.Prototipo
             tbCantidad.Text = cantidad;
         }
 
+        /// <summary>
+        /// Valida y modifica la informacion del producto en la BD
+        /// </summary>
         private void ModificarProducto()
         {
             // recolectar la información

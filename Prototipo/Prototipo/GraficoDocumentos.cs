@@ -23,6 +23,9 @@ namespace Prototipo.Prototipo
             CargarGrafico();
         }
 
+        /// <summary>
+        /// Carga el grafico con base en la informacion de la BD
+        /// </summary>
         private void CargarGrafico()
         {
             // traer info
