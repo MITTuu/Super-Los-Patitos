@@ -47,5 +47,10 @@ namespace Prototipo.Prototipo
         {
             abrir_Ventana(new GraficoVentas());
         }
+
+        private void btnGrafico2_Click(object sender, EventArgs e)
+        {
+            abrir_Ventana(new GraficoDocumentos());
+        }
     }
 }

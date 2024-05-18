@@ -458,6 +458,15 @@ BEGIN
         COUNT(d.idDocumento) DESC;
 END;
 
+CREATE PROCEDURE GetDocumentosGrafico
+AS
+BEGIN
+    SELECT TipoDocumento AS Tipo, COUNT(TipoDocumento) AS Cantidad
+    FROM Documentos AS d
+    INNER JOIN TiposDocumento AS t ON d.idTipoDocumento = t.idTipoDocumento
+    GROUP BY t.TipoDocumento
+END
+
 -- Info para grafico de ventas
 CREATE PROCEDURE GetVentasGrafico
 AS

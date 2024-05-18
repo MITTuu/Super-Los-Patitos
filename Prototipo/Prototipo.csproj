@@ -87,6 +87,12 @@
     <Compile Include="Prototipo\EditarProducto.Designer.cs">
       <DependentUpon>EditarProducto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Prototipo\GraficoDocumentos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Prototipo\GraficoDocumentos.Designer.cs">
+      <DependentUpon>GraficoDocumentos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Prototipo\Graficos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,6 +177,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Prototipo\EditarProducto.resx">
       <DependentUpon>EditarProducto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Prototipo\GraficoDocumentos.resx">
+      <DependentUpon>GraficoDocumentos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Prototipo\Graficos.resx">
       <DependentUpon>Graficos.cs</DependentUpon>

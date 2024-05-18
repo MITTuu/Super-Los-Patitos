@@ -72,7 +72,8 @@ CREATE TABLE Documentos (
     idCliente INT FOREIGN KEY REFERENCES Clientes(idCliente) NULL,
     TotalImpuestos DECIMAL(10,2) NULL,
     Subtotal DECIMAL(10,2) NULL,
-    Total DECIMAL(10,2) NULL
+    Total DECIMAL(10,2) NULL,
+    Estado BIT NOT NULL
 );
 
 -- Crear la tabla NotasCreditoDocumentos
@@ -90,7 +91,8 @@ CREATE TABLE Lineas (
     idProducto INT FOREIGN KEY REFERENCES Productos(idProducto) NOT NULL,
     Subtotal DECIMAL(10,2) NOT NULL,
     Impuesto DECIMAL(10,2) NOT NULL,
-    Total DECIMAL(10,2) NOT NULL
+    Total DECIMAL(10,2) NOT NULL,
+    Estado BIT NOT NULL
 );
 
 -- Crear la tabla Ajustes
