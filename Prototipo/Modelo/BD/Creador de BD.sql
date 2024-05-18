@@ -110,6 +110,8 @@ CREATE TABLE AjustesProducto (
     idAjuste INT FOREIGN KEY REFERENCES Ajustes(idAjuste) NOT NULL
 );
 
+DROP TABLE Ajustes
+
 -- Datos insertados por defecto
 INSERT INTO Roles (idRol, Rol)
 	VALUES
