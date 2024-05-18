@@ -1,6 +1,6 @@
 ﻿namespace Prototipo.Prototipo
 {
-    partial class GraficoVentas
+    partial class GraficoDocumentos
     {
         /// <summary>
         /// Required designer variable.
@@ -42,38 +42,39 @@
             this.grafico.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.grafico.Legends.Add(legend1);
-            this.grafico.Location = new System.Drawing.Point(28, 54);
+            this.grafico.Location = new System.Drawing.Point(29, 56);
             this.grafico.Name = "grafico";
             series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.grafico.Series.Add(series1);
-            this.grafico.Size = new System.Drawing.Size(634, 434);
-            this.grafico.TabIndex = 2;
-            this.grafico.Text = "Chart";
+            this.grafico.Size = new System.Drawing.Size(638, 429);
+            this.grafico.TabIndex = 0;
+            this.grafico.Text = "chart1";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.label1.Location = new System.Drawing.Point(139, 20);
+            this.label1.Location = new System.Drawing.Point(166, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(432, 20);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Cantidad de productos vendidos en la ultima semana";
+            this.label1.Size = new System.Drawing.Size(370, 20);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Distribución de tipos de documentos creados";
             // 
-            // GraficoVentas
+            // GraficoDocumentos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.ClientSize = new System.Drawing.Size(687, 500);
+            this.ClientSize = new System.Drawing.Size(693, 497);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.grafico);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "GraficoVentas";
-            this.Text = "GraficoVentas";
+            this.Name = "GraficoDocumentos";
+            this.Text = "GraficoDocumentos";
             ((System.ComponentModel.ISupportInitialize)(this.grafico)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

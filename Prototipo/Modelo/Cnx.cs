@@ -872,6 +872,34 @@ namespace Prototipo.Modelo
             return productosData;
         }
 
+        public DataTable GetDocumentosGrafico()
+        {
+            DataTable dt = null;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    SqlCommand command = new SqlCommand("GetDocumentosGrafico", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+
+                    dt = dataTable;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK);
+            }
+
+            return dt;
+        }
+
         public DataTable GetVentasGrafico()
         {
             DataTable dt = null;
