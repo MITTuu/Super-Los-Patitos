@@ -49,12 +49,16 @@
             this.tbNombre = new System.Windows.Forms.TextBox();
             this.lbNombre = new System.Windows.Forms.Label();
             this.lbtitulo = new System.Windows.Forms.Label();
+            this.lbEstado = new System.Windows.Forms.Label();
+            this.cbEstado = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.panel1.Controls.Add(this.cbEstado);
+            this.panel1.Controls.Add(this.lbEstado);
             this.panel1.Controls.Add(this.cbRol);
             this.panel1.Controls.Add(this.cbTipoI);
             this.panel1.Controls.Add(this.btnCrear);
@@ -110,6 +114,7 @@
             this.cbTipoI.Name = "cbTipoI";
             this.cbTipoI.Size = new System.Drawing.Size(279, 33);
             this.cbTipoI.TabIndex = 22;
+            this.cbTipoI.SelectedIndexChanged += new System.EventHandler(this.cbTipoI_SelectedIndexChanged);
             // 
             // btnCrear
             // 
@@ -125,7 +130,7 @@
             // tbTelefono
             // 
             this.tbTelefono.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbTelefono.Location = new System.Drawing.Point(847, 401);
+            this.tbTelefono.Location = new System.Drawing.Point(847, 262);
             this.tbTelefono.Name = "tbTelefono";
             this.tbTelefono.Size = new System.Drawing.Size(279, 30);
             this.tbTelefono.TabIndex = 18;
@@ -153,7 +158,7 @@
             // 
             this.lbTelefono.AutoSize = true;
             this.lbTelefono.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTelefono.Location = new System.Drawing.Point(842, 373);
+            this.lbTelefono.Location = new System.Drawing.Point(842, 231);
             this.lbTelefono.Name = "lbTelefono";
             this.lbTelefono.Size = new System.Drawing.Size(89, 25);
             this.lbTelefono.TabIndex = 15;
@@ -258,6 +263,7 @@
             this.tbNombre.Name = "tbNombre";
             this.tbNombre.Size = new System.Drawing.Size(279, 30);
             this.tbNombre.TabIndex = 2;
+            this.tbNombre.TextChanged += new System.EventHandler(this.tbNombre_TextChanged);
             // 
             // lbNombre
             // 
@@ -278,6 +284,29 @@
             this.lbtitulo.Size = new System.Drawing.Size(288, 38);
             this.lbtitulo.TabIndex = 5;
             this.lbtitulo.Text = "Registrar Personal\r\n";
+            // 
+            // lbEstado
+            // 
+            this.lbEstado.AutoSize = true;
+            this.lbEstado.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbEstado.Location = new System.Drawing.Point(842, 373);
+            this.lbEstado.Name = "lbEstado";
+            this.lbEstado.Size = new System.Drawing.Size(73, 25);
+            this.lbEstado.TabIndex = 24;
+            this.lbEstado.Text = "Estado";
+            // 
+            // cbEstado
+            // 
+            this.cbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEstado.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbEstado.FormattingEnabled = true;
+            this.cbEstado.Items.AddRange(new object[] {
+            "INACTIVO",
+            "ACTIVO"});
+            this.cbEstado.Location = new System.Drawing.Point(847, 401);
+            this.cbEstado.Name = "cbEstado";
+            this.cbEstado.Size = new System.Drawing.Size(279, 33);
+            this.cbEstado.TabIndex = 25;
             // 
             // PersonalCrear
             // 
@@ -321,5 +350,7 @@
         private System.Windows.Forms.Button btnCrear;
         private System.Windows.Forms.ComboBox cbTipoI;
         private System.Windows.Forms.ComboBox cbRol;
+        private System.Windows.Forms.Label lbEstado;
+        private System.Windows.Forms.ComboBox cbEstado;
     }
 }
